@@ -1,6 +1,8 @@
 using System.Net;
 using System.Text;
+using AutoMapper;
 using FootballApp.API.Data;
+using FootballApp.API.Data.Members;
 using FootballApp.API.Helpers;
 using FootballApp.API.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -70,12 +72,16 @@ namespace FootballApp.API
                     .Build();
 
                 options.Filters.Add(new AuthorizeFilter(policy));
+            }).AddNewtonsoftJson(opt => {
+                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
+
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddCors();
-            
+            services.AddAutoMapper(typeof(MemberRepository).Assembly);
             // add scoped makes an instance for every request
-            //services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IMemberRepository, MemberRepository>();
             
             
         }

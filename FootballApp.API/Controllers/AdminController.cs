@@ -23,9 +23,8 @@ namespace FootballApp.API.Controllers
             _context = context;
         }
 
-        // [Authorize(Policy = "RequireAdminRole")]
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpGet("usersWithRoles")]
-        [AllowAnonymous]
         public async Task<IActionResult> GetUsersWithRoles()
         {
             var userList = await _context.Users
@@ -49,7 +48,7 @@ namespace FootballApp.API.Controllers
         [HttpPost("editRoles/{userName}")]
         public async Task<IActionResult> EditRoles(string userName, RoleEditDto roleEditDto)
         {
-            System.Diagnostics.Debug.WriteLine(roleEditDto + " apo sunartisi");
+            //System.Diagnostics.Debug.WriteLine(roleEditDto + " apo sunartisi");
             var user = await _userManager.FindByNameAsync(userName);
 
             var userRoles = await _userManager.GetRolesAsync(user);
