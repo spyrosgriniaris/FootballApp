@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,7 +20,17 @@ import { MessagesComponent } from './messages/messages.component';
 import { RankComponent } from './rank/rank.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './_directives/hasRole.directive';
+import { JwtModule } from '@auth0/angular-jwt';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
+import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 
+
+export function tokenGetter() {
+   return localStorage.getItem('token'); // vazw kai sta imports to jwt
+}
 
 @NgModule({
    declarations: [
@@ -30,7 +42,12 @@ import { appRoutes } from './routes';
       PlayersListComponent,
       LikesComponent,
       MessagesComponent,
-      RankComponent
+      RankComponent,
+      AdminPanelComponent,
+      HasRoleDirective,
+      UserManagementComponent,
+      PhotoManagementComponent,
+      RolesModalComponent
    ],
    imports: [
       BrowserModule,
@@ -39,10 +56,22 @@ import { appRoutes } from './routes';
       FormsModule,
       BrowserAnimationsModule,
       BsDropdownModule.forRoot(),
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      TabsModule.forRoot(),
+      ModalModule.forRoot(),
+      JwtModule.forRoot({
+         config: {
+            tokenGetter: tokenGetter,
+            allowedDomains: ["localhost:5000"],
+            disallowedRoutes: ["localhost:5000/api/values"]
+         },
+      }),
    ],
    providers: [
       ErrorInterceptorProvider
+   ],
+   entryComponents: [
+      RolesModalComponent
    ],
    bootstrap: [
       AppComponent

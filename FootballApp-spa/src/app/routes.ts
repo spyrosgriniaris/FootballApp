@@ -5,6 +5,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { LikesComponent } from './likes/likes.component';
 import { RankComponent } from './rank/rank.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -16,9 +17,10 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always',
         children: [
             {path: 'players', component: PlayersListComponent},
+            {path: 'rank', component: RankComponent},
             {path: 'messages', component: MessagesComponent, canActivate: [AuthGuard]},
             {path: 'likes', component: LikesComponent, canActivate: [AuthGuard]},
-            {path: 'rank', component: RankComponent}
+            {path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard], data: {roles: ['Admin']}}
         ]
     },
     {path: '**', redirectTo: 'home', pathMatch: 'full'},
