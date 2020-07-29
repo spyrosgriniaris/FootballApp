@@ -4,6 +4,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthService } from './_services/auth.service';
 import { Subject, Subscription } from 'rxjs';
 import { Router, NavigationStart } from '@angular/router';
+import { User } from './_models/user';
 
 export let browserRefresh =false;
 @Component({
@@ -30,9 +31,14 @@ export class AppComponent {
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnInit(){
     const token = localStorage.getItem('token');
+    const user: User = JSON.parse(localStorage.getItem('user'));
     // afairw apo local storage sti logout tou nav component
     if (token){
       this.authService.decodedToken = this.jwtHelper.decodeToken(token);
+    }
+    if (user){
+      this.authService.currentUser = user;
+      this.authService.changeMemberPhoto(user.photoUrl);
     }
   }
 }

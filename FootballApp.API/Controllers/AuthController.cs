@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using FootballApp.API.Data;
 using FootballApp.API.Dtos;
 using FootballApp.API.Models;
@@ -25,9 +26,12 @@ namespace FootballApp.API.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
+        private readonly IMapper _mapper;
 
-        public AuthController(IConfiguration config, UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<Role> roleManager)
+        public AuthController(IConfiguration config, UserManager<User> userManager,
+         SignInManager<User> signInManager, RoleManager<Role> roleManager, IMapper mapper)
         {
+            _mapper = mapper;
             _roleManager = roleManager;
             _userManager = userManager;
             _signInManager = signInManager;
@@ -74,11 +78,14 @@ namespace FootballApp.API.Controllers
 
             var result = await _signInManager.CheckPasswordSignInAsync(userFromDb, userForLoginDto.Password, false);
 
+            var user = _mapper.Map<MemberForListDto>(userFromDb);
+
             if (result.Succeeded)
             {
                 return Ok(new
                 {
-                    token = GenerateJwtToken(userFromDb).Result
+                    token = GenerateJwtToken(userFromDb).Result,
+                    user
                 });
             }
 

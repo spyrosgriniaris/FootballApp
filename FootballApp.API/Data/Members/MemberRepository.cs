@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using FootballApp.API.Models;
 using Microsoft.AspNetCore.Identity;
@@ -27,8 +28,8 @@ namespace FootballApp.API.Data.Members
 
         public async Task<User> GetUser(int id)
         {
-            var user = await _userManager.FindByIdAsync(id.ToString());
-
+            var user = await _userManager.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
+            // var user = await _userManager.FindByIdAsync(id.ToString());
             return user;
         }
 
@@ -42,6 +43,17 @@ namespace FootballApp.API.Data.Members
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<Photo> GetPhoto(int id) {
+            var photo = await _context.Photo.FirstOrDefaultAsync(p => p.Id == id);
+
+            return photo;
+        }
+
+        public async Task<Photo> GetMainPhotoForUser(int userId) {
+            var photo = await _context.Photo.FirstOrDefaultAsync(p => p.isMain);
+            return photo;
         }
     }
 }

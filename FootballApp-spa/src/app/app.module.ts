@@ -6,15 +6,17 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ModalModule } from 'ngx-bootstrap/modal';
-
+import { TimeagoModule } from 'ngx-timeago';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
+import { JwtModule } from '@auth0/angular-jwt';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+
 import { AppComponent } from './app.component';
 import { ValueComponent } from './value/value.component';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PlayersListComponent } from './players-list/players-list.component';
 import { LikesComponent } from './likes/likes.component';
 import { MessagesComponent } from './messages/messages.component';
 import { RankComponent } from './rank/rank.component';
@@ -22,10 +24,15 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HasRoleDirective } from './_directives/hasRole.directive';
-import { JwtModule } from '@auth0/angular-jwt';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
+import { PlayersListComponent } from './players/players-list/players-list.component';
+import { PlayerCardComponent } from './players/player-card/player-card.component';
+import { PlayerDetailComponent } from './players/player-detail/player-detail.component';
+import { PlayerEditComponent } from './players/player-edit/player-edit.component';
+import { PhotoEditorComponent } from './players/photo-editor/photo-editor.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 export function tokenGetter() {
@@ -40,6 +47,7 @@ export function tokenGetter() {
       HomeComponent,
       RegisterComponent,
       PlayersListComponent,
+      PlayerCardComponent,
       LikesComponent,
       MessagesComponent,
       RankComponent,
@@ -47,7 +55,10 @@ export function tokenGetter() {
       HasRoleDirective,
       UserManagementComponent,
       PhotoManagementComponent,
-      RolesModalComponent
+      RolesModalComponent,
+      PlayerDetailComponent,
+      PlayerEditComponent,
+      PhotoEditorComponent
    ],
    imports: [
       BrowserModule,
@@ -55,10 +66,13 @@ export function tokenGetter() {
       HttpClientModule,
       FormsModule,
       BrowserAnimationsModule,
+      TimeagoModule.forRoot(),
       BsDropdownModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       TabsModule.forRoot(),
       ModalModule.forRoot(),
+      NgxGalleryModule,
+      FileUploadModule,
       JwtModule.forRoot({
          config: {
             tokenGetter: tokenGetter,

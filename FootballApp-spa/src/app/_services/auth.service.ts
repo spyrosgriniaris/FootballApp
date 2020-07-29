@@ -3,7 +3,8 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
+import { User } from '../_models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,11 @@ export class AuthService {
   jwtHelper = new JwtHelperService();
   decodedToken: any;
   tokenChangedForLogin = new Subject<string>(); // subject to send token to hasRole directive
+  // subject for updating the nav image when main photo is changed
+  // BehavioSubject always take initial value
+  photoUrl = new BehaviorSubject<string>('../../assets/user.png');
+  currentPhotoUrl = this.photoUrl.asObservable(); // to antistoixo subscription
+  currentUser: User;
 
   constructor(private http: HttpClient) { }
 
@@ -24,12 +30,19 @@ export class AuthService {
             const user = response;
             if (user){
               localStorage.setItem('token', user.token);
+              localStorage.setItem('user', JSON.stringify(user.user));
               this.decodedToken = this.jwtHelper.decodeToken(user.token);
+              this.currentUser = user.user;
               this.tokenChangedForLogin.next(localStorage.getItem('token'));
+              this.changeMemberPhoto(this.currentUser.photoUrl);
             }
           }
         )
       );
+  }
+
+  changeMemberPhoto(photoUrl: string){
+    this.photoUrl.next(photoUrl);
   }
 
   register(model: any) {

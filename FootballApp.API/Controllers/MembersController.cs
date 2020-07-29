@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using FootballApp.API.Data;
@@ -44,6 +46,21 @@ namespace FootballApp.API.Controllers
             var userToReturn = _mapper.Map<MemberForDetailedDto>(user);
 
             return Ok(userToReturn);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateMember(int id, MemberForUpdateDto memberForUpdateDto) {
+            // check if parameter's id equals the id that is part of the token
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            var userFromRepo = await _memberRepo.GetUser(id);
+
+            _mapper.Map(memberForUpdateDto, userFromRepo);
+
+            if (await _memberRepo.SaveAll()){
+                return NoContent();
+            }
+            throw new Exception($"Updating user {id} failed on save");
         }
     }
 }
