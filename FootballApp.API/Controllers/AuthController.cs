@@ -49,17 +49,20 @@ namespace FootballApp.API.Controllers
             // if (await _repo.UserExists(userForRegisterDto.Username))
             //     return BadRequest("Username already exists");
 
-            var userToCreate = new User
-            {
-                UserName = userForRegisterDto.Username
-            };
+            // var userToCreate = new User
+            // {
+            //     UserName = userForRegisterDto.Username
+            // };
+
+            var userToCreate = _mapper.Map<User>(userForRegisterDto);
 
             var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
 
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(userToCreate, "Member");
-                return StatusCode(201);
+                return CreatedAtRoute("GetUser", new {controller = "Members", id = userToCreate.Id}, _mapper.Map<MemberForDetailedDto>(userToCreate));
+                // return StatusCode(201);
             }
 
             return BadRequest(result.Errors);

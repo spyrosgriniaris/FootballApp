@@ -11,6 +11,8 @@ import { catchError } from 'rxjs/operators';
 })
 
 export class PlayerListResolver implements Resolve<User> {
+    pageNumber = 1;
+    pageSize = 5;
     /**
      *
      */
@@ -20,7 +22,7 @@ export class PlayerListResolver implements Resolve<User> {
 
     resolve(route: ActivatedRouteSnapshot): Observable<User> {
         // tslint:disable-next-line: no-string-literal
-        return this.memberService.getUsers().pipe(
+        return this.memberService.getUsers(this.pageNumber, this.pageSize).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
                 this.router.navigate(['/players']);

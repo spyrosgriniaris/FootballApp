@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FootballApp.API.Data;
 using FootballApp.API.Dtos;
+using FootballApp.API.Helpers;
 using FootballApp.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FootballApp.API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [Route("api/[controller]")]
     [ApiController]
     [AllowAnonymous]
@@ -28,11 +30,22 @@ namespace FootballApp.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUsers()
+        public async Task<IActionResult> GetUsers([FromQuery] UserParams userParams)
         {
-            var users = await _memberRepo.GetUsers();
+            // filtering for not showing loggedIn user's profile
+            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await _memberRepo.GetUser(currentUserId);
+            userParams.UserId = currentUserId;
+
+             if (string.IsNullOrEmpty(userParams.Gender)) {
+                userParams.Gender = userFromRepo.Gender  == "male" ? "male" : "female";
+            }
+
+            var users = await _memberRepo.GetUsers(userParams);
 
             var usersToReturn = _mapper.Map<IEnumerable<MemberForListDto>>(users);
+
+            Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
 
             return Ok(usersToReturn);
         }
