@@ -15,6 +15,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 import { AppComponent } from './app.component';
 import { ValueComponent } from './value/value.component';
@@ -76,6 +77,7 @@ export function tokenGetter() {
       BsDatepickerModule.forRoot(),
       TimeagoModule.forRoot(),
       BsDropdownModule.forRoot(),
+      CollapseModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       TabsModule.forRoot(),
       ModalModule.forRoot(),
