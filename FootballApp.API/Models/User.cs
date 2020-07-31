@@ -24,5 +24,9 @@ namespace FootballApp.API.Models
         public ICollection<Photo> Photos { get; set; }
 
         public ICollection<UserRole> UserRoles { get; set; }
+
+        // Likes Functionality
+        public ICollection<Like> Likers { get; set; }
+        public ICollection<Like> Likees { get; set; }
     }
 }

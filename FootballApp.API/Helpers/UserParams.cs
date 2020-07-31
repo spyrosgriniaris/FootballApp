@@ -21,5 +21,10 @@ namespace FootballApp.API.Helpers
         public int MaxAge { get; set; } = 99;
 
         // end of additional filtering properties
+
+        // likes functionality
+        public bool Likees { get; set; } = false;
+        public bool Likers { get; set; } = false;
+        // end of likes functionality
     }
 }

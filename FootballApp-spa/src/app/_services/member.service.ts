@@ -17,7 +17,7 @@ export class MemberService {
   // getUsers(): Observable<User[]> {
   //   return this.http.get<User[]>(this.baseUrl + 'members');
   // }
-  getUsers(page?, itemsPerPage?, userParams?): Observable<PaginatedResult<User[]>> {
+  getUsers(page?, itemsPerPage?, userParams?, likesParam?): Observable<PaginatedResult<User[]>> {
     const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
     let params = new HttpParams();
 
@@ -30,10 +30,19 @@ export class MemberService {
       params = params.append('minAge', userParams.minAge);
       params = params.append('maxAge', userParams.maxAge);
       params = params.append('gender', userParams.gender);
-      // sorting area
-      // params = params.append('orderBy', userParams.orderBy);
-      // end of sorting area
     }
+
+    // likes functionality
+    if (likesParam === 'Likers')
+    {
+      params = params.append('likers', 'true');
+    }
+
+    if (likesParam === 'Likees')
+    {
+      params = params.append('likees', 'true');
+    }
+    // end of likes functionality
 
     return this.http.get<User[]>(this.baseUrl + 'members', { observe: 'response', params})
     .pipe(
@@ -61,6 +70,10 @@ export class MemberService {
 
   deletePhoto(userId: number, id: number){
     return this.http.delete(this.baseUrl + 'members/' + userId + '/photos/' + id);
+  }
+
+  sendLike(id: number, recipientId: number) {
+    return this.http.post(this.baseUrl + 'members/' + id + '/like/' + recipientId, {});
   }
 
 }

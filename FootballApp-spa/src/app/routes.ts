@@ -12,6 +12,7 @@ import { PlayerDetailResolver } from './_resolvers/player-detail.resolver';
 import { PlayerEditComponent } from './players/player-edit/player-edit.component';
 import { PlayerEditResolver } from './_resolvers/player-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { LikesResolver } from './_resolvers/likes.resolver';
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -28,7 +29,7 @@ export const appRoutes: Routes = [
              canDeactivate: [PreventUnsavedChanges]},
             {path: 'rank', component: RankComponent},
             {path: 'messages', component: MessagesComponent, canActivate: [AuthGuard]},
-            {path: 'likes', component: LikesComponent, canActivate: [AuthGuard]},
+            {path: 'likes', component: LikesComponent, resolve: {users: LikesResolver}, canActivate: [AuthGuard]},
             {path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard], data: {roles: ['Admin']}},
         ]
     },

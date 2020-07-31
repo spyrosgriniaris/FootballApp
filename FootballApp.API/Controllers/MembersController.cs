@@ -75,5 +75,32 @@ namespace FootballApp.API.Controllers
             }
             throw new Exception($"Updating user {id} failed on save");
         }
+
+        [HttpPost("{id}/like/{recipientId}")]
+        public async Task<IActionResult> LikeUser(int id, int recipientId) {
+
+            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            if(id != currentUserId)
+                return Unauthorized();
+
+            var like = await _memberRepo.GetLike(id, recipientId);
+
+            if(like != null)
+                return BadRequest("You already like the user");
+            
+            if(await _memberRepo.GetUser(recipientId) == null)
+                return NotFound();
+            like = new Like {
+                LikerId = id,
+                LikeeId = recipientId
+            };
+
+            _memberRepo.Add<Like>(like);
+
+            if(await _memberRepo.SaveAll())
+                return Ok();
+            
+            return BadRequest("Failed to like user");
+        }
     }
 }

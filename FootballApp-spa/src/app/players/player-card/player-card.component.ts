@@ -19,4 +19,15 @@ export class PlayerCardComponent implements OnInit {
   ngOnInit() {
   }
 
+    // like functionality
+    sendLike(id: number) {
+      this.memberService.sendLike(this.authService.decodedToken.nameid, id).subscribe(
+        data => {
+          this.alertify.success('You have liked ' + this.user.knownAs);
+        }, error => {
+          this.alertify.error(error);
+        }
+      );
+    }
+
 }

@@ -27,6 +27,10 @@ namespace FootballApp.API.Data.Members
         {
             _context.Remove(entity);
         }
+        public async Task<bool> SaveAll()
+        {
+            return await _context.SaveChangesAsync() > 0;
+        }
 
         public async Task<User> GetUser(int id)
         {
@@ -45,6 +49,20 @@ namespace FootballApp.API.Data.Members
 
             users = users.Where(u => u.Gender == userParams.Gender);
 
+            // likes functionality
+            if (userParams.Likers)
+            {
+                var userLikers = await GetUserLikes(userParams.UserId, userParams.Likers);
+                users = users.Where(u => userLikers.Contains(u.Id));
+            }
+
+            if (userParams.Likees)
+            {
+                var userLikees = await GetUserLikes(userParams.UserId, userParams.Likers);
+                users = users.Where(u => userLikees.Contains(u.Id));
+            }
+            // end of likes functionality
+
             // additional filtering area 
             if (userParams.MinAge != 18 || userParams.MaxAge != 99){
                 var minDoB = DateTime.Today.AddYears(-userParams.MaxAge - 1);// minDateOfBirth
@@ -58,11 +76,6 @@ namespace FootballApp.API.Data.Members
             return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
         }
 
-        public async Task<bool> SaveAll()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
-
         public async Task<Photo> GetPhoto(int id) {
             var photo = await _context.Photo.FirstOrDefaultAsync(p => p.Id == id);
 
@@ -72,6 +85,25 @@ namespace FootballApp.API.Data.Members
         public async Task<Photo> GetMainPhotoForUser(int userId) {
             var photo = await _context.Photo.FirstOrDefaultAsync(p => p.isMain);
             return photo;
+        }
+
+        public async Task<Like> GetLike(int userId, int recipientId) {
+            return await _context.Likes.FirstOrDefaultAsync(u => u.LikerId == userId && u.LikeeId == recipientId);
+        }
+
+        private async Task<IEnumerable<int>> GetUserLikes(int id, bool likers){
+            var user = await _userManager.Users
+                .Include(x => x.Likers)
+                .Include(x => x.Likees)
+                .FirstOrDefaultAsync(u => u.Id == id);
+
+            if (likers){
+                // list of likers of the currently loggedIn user
+                return user.Likers.Where(u => u.LikeeId == id).Select(i => i.LikerId);
+            }
+            else {
+                return user.Likees.Where(u => u.LikerId == id).Select(i => i.LikeeId);
+            }
         }
     }
 }

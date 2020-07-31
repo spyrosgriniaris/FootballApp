@@ -14,6 +14,7 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import { AppComponent } from './app.component';
 import { ValueComponent } from './value/value.component';
@@ -61,7 +62,8 @@ export function tokenGetter() {
       RolesModalComponent,
       PlayerDetailComponent,
       PlayerEditComponent,
-      PhotoEditorComponent
+      PhotoEditorComponent,
+      LikesComponent
    ],
    imports: [
       BrowserModule,
@@ -70,6 +72,7 @@ export function tokenGetter() {
       FormsModule,
       ReactiveFormsModule,
       BrowserAnimationsModule,
+      ButtonsModule,
       BsDatepickerModule.forRoot(),
       TimeagoModule.forRoot(),
       BsDropdownModule.forRoot(),
