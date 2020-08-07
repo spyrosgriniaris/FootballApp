@@ -11,6 +11,11 @@ import { map } from 'rxjs/operators';
 })
 export class MemberService {
   baseUrl = environment.apiUrl;
+  // variables for search in players-list component
+  searchWord: string;
+  suggestions$: Observable<User[]>;
+  errorMessageForSearch: string;
+
 
   constructor(private http: HttpClient) { }
 
@@ -30,6 +35,7 @@ export class MemberService {
       params = params.append('minAge', userParams.minAge);
       params = params.append('maxAge', userParams.maxAge);
       params = params.append('gender', userParams.gender);
+      params = params.append('searchWord', userParams.searchWord);
     }
 
     // likes functionality

@@ -16,6 +16,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { AppComponent } from './app.component';
 import { ValueComponent } from './value/value.component';
@@ -82,7 +85,10 @@ export function tokenGetter() {
       TabsModule.forRoot(),
       ModalModule.forRoot(),
       PaginationModule.forRoot(),
+      TypeaheadModule.forRoot(),
       NgxGalleryModule,
+      MatAutocompleteModule,
+      MatFormFieldModule,
       FileUploadModule,
       JwtModule.forRoot({
          config: {

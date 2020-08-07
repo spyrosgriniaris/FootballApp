@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-
+import { noop, Observable, Observer, of } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/_models/user';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { MemberService } from 'src/app/_services/member.service';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
+import { HttpClient } from '@angular/common/http';
+import { UserSearchResponse } from 'src/app/_models/user-search-response';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-players-list',
@@ -17,9 +21,17 @@ export class PlayersListComponent implements OnInit {
   pagination: Pagination;
   genderList = [{value: 'male', display: 'Males'}, {value: 'female', display: 'Female'}];
   userParams: any = {};
+
+  // variables for search
+  // searchWord: string;
+  // suggestions$: Observable<User[]>;
+  // errorMessageForSearch: string;
+
+
   constructor(private memberService: MemberService,
               private alertify: AlertifyService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private http: HttpClient) { }
 
   ngOnInit() {
     //this.loadUsers();
@@ -34,10 +46,33 @@ export class PlayersListComponent implements OnInit {
     this.userParams.gender = this.user.gender === 'female' ? 'female' : 'male';
     this.userParams.minAge = 18;
     this.userParams.maxAge = 99;
+    this.userParams.searchWord = '';
     // end of additional filtering area
+
+    // this.suggestions$ = new Observable((observer: Observer<string>) => {
+    //   observer.next(this.searchWord);
+    // }).pipe(
+    //   switchMap((query: string) => {
+    //     if (query) {
+    //       console.log(query);
+    //       // using github public api to get users by name
+    //       return this.http.get<UserSearchResponse>(
+    //         'http://localhost:5000/api/members/SearchUsers/' + query).pipe(
+    //         map((data: UserSearchResponse) => data && data.items || []),
+    //         tap(() => noop, err => {
+    //           // in case of http error
+    //           this.errorMessageForSearch = err && err.message || 'Something goes wrong';
+    //         })
+    //       );
+    //     }
+    //     return of([]);
+    //   })
+    // );
   }
 
+
   loadUsers() {
+    // console.log(this.userParams.searchWord);
     this.memberService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams).subscribe(
       (res: PaginatedResult<User[]>) => {
         this.users = res.result;
@@ -58,6 +93,16 @@ export class PlayersListComponent implements OnInit {
     this.userParams.minAge = 18;
     this.userParams.maxAge = 99;
     this.loadUsers();
+  }
+
+  searchUsers() {
+    if (!this.userParams.searchWord) {
+      this.userParams.searchWord = '';
+      this.loadUsers();
+    }
+    else {
+      this.loadUsers();
+    }
   }
 
 }

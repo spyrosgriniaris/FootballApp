@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using FootballApp.API.Dtos;
 using FootballApp.API.Helpers;
 using FootballApp.API.Models;
 
@@ -16,5 +17,6 @@ namespace FootballApp.API.Data
          Task<Photo> GetPhoto(int id);
          Task<Photo> GetMainPhotoForUser(int userId);
          Task<Like> GetLike(int userId, int recipientId);
+         Task<MembersForSearchDto> SearchUsers(string searchWord);
     }
 }

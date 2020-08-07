@@ -4,7 +4,7 @@ namespace FootballApp.API.Helpers
     {
         private const int MaxPageSize = 50;
         public int PageNumber { get; set; } = 1; // returns 1 unless requested something else
-        private int pageSize = 10;
+        private int pageSize = 12;
         public int PageSize
         {
             get { return pageSize; }
@@ -19,6 +19,7 @@ namespace FootballApp.API.Helpers
          // additional filtering properties
         public int MinAge { get; set; } = 18;
         public int MaxAge { get; set; } = 99;
+        public string SearchWord { get; set; }
 
         // end of additional filtering properties
 

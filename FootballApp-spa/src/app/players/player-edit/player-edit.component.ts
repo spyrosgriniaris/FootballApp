@@ -26,14 +26,17 @@ export class PlayerEditComponent implements OnInit {
   constructor(private memberService: MemberService,
               private alertify: AlertifyService,
               private route: ActivatedRoute,
-              private authService: AuthService) { }
+              private authService: AuthService) {
+               }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
     // tslint:disable-next-line: no-string-literal
     this.user = data['user'];
     });
+    this.photoUrl = this.user.photoUrl;
     this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
+    console.log(this.user.photoUrl);
   }
 
   updateUser() {

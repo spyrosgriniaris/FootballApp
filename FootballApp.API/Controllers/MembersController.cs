@@ -102,5 +102,11 @@ namespace FootballApp.API.Controllers
             
             return BadRequest("Failed to like user");
         }
+
+        [HttpGet("SearchUsers/{searchWord}")]
+        public async Task<IActionResult> SearchUsers(string searchWord) {
+            var searchResult = await _memberRepo.SearchUsers(searchWord);
+            return Ok(searchResult);
+        }
     }
 }

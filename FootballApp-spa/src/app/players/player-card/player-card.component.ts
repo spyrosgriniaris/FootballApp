@@ -11,12 +11,23 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 })
 export class PlayerCardComponent implements OnInit {
   @Input() user: User;
+  isNew = false;
   constructor(private authService: AuthService,
               private memberService: MemberService,
               private alertify: AlertifyService
     ) { }
 
   ngOnInit() {
+    // conver user created date in utc and add 4 days
+    const userCreatedDate = new Date(this.user.created);
+    userCreatedDate.setDate(userCreatedDate.getDate() + 4);
+
+    // today's date
+    const today = new Date();
+
+    if (today < userCreatedDate) {
+      this.isNew = true;
+    }
   }
 
     // like functionality
