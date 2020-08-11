@@ -57,6 +57,17 @@ known as
       required</div>
   </div>
 
+  <!-- Email -->
+  <div class="form-group">
+    <input type="email" class="form-control" formControlName="email"
+    [ngClass]="{'is-invalid': registerForm.get('email').errors && registerForm.get('email').touched}"
+     name="email" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+     <div class="invalid-feedback"
+      *ngIf="registerForm.get('email').touched && registerForm.get('email').hasError('required')">Email as is
+      required</div>
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+
   <!-- =====
 date of birth before handling dates
 ===== -->

@@ -3,14 +3,16 @@ using System;
 using FootballApp.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FootballApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200808104424_PlayerPositionsAdded")]
+    partial class PlayerPositionsAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -183,9 +185,6 @@ namespace FootballApp.API.Migrations
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("TotalLikes")
-                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("INTEGER");

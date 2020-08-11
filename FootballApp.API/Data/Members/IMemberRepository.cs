@@ -13,10 +13,13 @@ namespace FootballApp.API.Data
          Task<bool> SaveAll();
         //  Task<IEnumerable<User>> GetUsers();
         Task<PagedList<User>> GetUsers(UserParams userParams);
+        Task<PagedList<User>> GetUsersForLikes(LikesParams likesParams);
          Task<User> GetUser(int id);
          Task<Photo> GetPhoto(int id);
          Task<Photo> GetMainPhotoForUser(int userId);
          Task<Like> GetLike(int userId, int recipientId);
          Task<MembersForSearchDto> SearchUsers(string searchWord);
+         Task<IEnumerable<int>> GetUserLikes(int id, bool likers);
+         Task<User> GetUserWithPositions(int userId);
     }
 }

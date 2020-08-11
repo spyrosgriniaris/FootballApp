@@ -13,6 +13,7 @@ import { PlayerEditComponent } from './players/player-edit/player-edit.component
 import { PlayerEditResolver } from './_resolvers/player-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { LikesResolver } from './_resolvers/likes.resolver';
+import { RankResolver } from './_resolvers/rank.resolver';
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -27,7 +28,7 @@ export const appRoutes: Routes = [
             {path: 'players/:id', component: PlayerDetailComponent, resolve: {user: PlayerDetailResolver}},
             {path: 'member/edit', component: PlayerEditComponent, resolve: {user: PlayerEditResolver},
              canDeactivate: [PreventUnsavedChanges]},
-            {path: 'rank', component: RankComponent},
+            {path: 'rank', component: RankComponent, resolve: {users: RankResolver}},
             {path: 'messages', component: MessagesComponent, canActivate: [AuthGuard]},
             {path: 'likes', component: LikesComponent, resolve: {users: LikesResolver}, canActivate: [AuthGuard]},
             {path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard], data: {roles: ['Admin']}},

@@ -21,9 +21,11 @@ namespace FootballApp.API.Models
         public string Interests { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        public int TotalLikes { get; set; }
         public ICollection<Photo> Photos { get; set; }
 
         public ICollection<UserRole> UserRoles { get; set; }
+        public ICollection<PlayerPosition> Positions { get; set; }
 
         // Likes Functionality
         public ICollection<Like> Likers { get; set; }

@@ -20,7 +20,7 @@ namespace FootballApp.API.Data.Members
         {
             _context = context;
             _userManager = userManager;
-             _mapper = mapper;
+            _mapper = mapper;
         }
         public void Add<T>(T entity) where T : class
         {
@@ -38,7 +38,7 @@ namespace FootballApp.API.Data.Members
 
         public async Task<User> GetUser(int id)
         {
-            var user = await _userManager.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _userManager.Users.Include(p => p.Photos).Include(p => p.Positions).FirstOrDefaultAsync(u => u.Id == id);
             // var user = await _userManager.FindByIdAsync(id.ToString());
             return user;
         }
@@ -84,6 +84,14 @@ namespace FootballApp.API.Data.Members
             return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
         }
 
+        public async Task<PagedList<User>> GetUsersForLikes(LikesParams likesParams) {
+            var users = _userManager.Users.AsQueryable();
+
+            users = users.OrderByDescending(u => u.TotalLikes);
+            
+            return await PagedList<User>.CreateAsync(users, likesParams.PageNumber, likesParams.PageSize);
+        }
+
         public async Task<Photo> GetPhoto(int id) {
             var photo = await _context.Photo.FirstOrDefaultAsync(p => p.Id == id);
 
@@ -99,7 +107,7 @@ namespace FootballApp.API.Data.Members
             return await _context.Likes.FirstOrDefaultAsync(u => u.LikerId == userId && u.LikeeId == recipientId);
         }
 
-        private async Task<IEnumerable<int>> GetUserLikes(int id, bool likers){
+        public async Task<IEnumerable<int>> GetUserLikes(int id, bool likers){
             var user = await _userManager.Users
                 .Include(x => x.Likers)
                 .Include(x => x.Likees)
@@ -138,5 +146,27 @@ namespace FootballApp.API.Data.Members
 
             return membersForSearchDto;
         }
+
+        public async Task<User> GetUserWithPositions(int userId)
+        {
+            var user = await _context.Users
+                .Include(p => p.Positions)
+                .Where(u => u.Id == userId)
+                .FirstOrDefaultAsync();
+            return user;
+        }
+
+        // public async Task<PagedList<MemberForListDto>> GetUsersWithLikes(LikesParams likesParams)
+        // {
+        //     // var users = _userManager.Users.Include(x => x.Likers)
+        //     //     .Include(x => x.Likees).AsQueryable();
+
+        //     // // foreach(MemberForListDto user in usersToReturn) {
+        //     // //     //user.TotalLikes = await _context.Likes.Where(u => u.LikeeId == user.Id).CountAsync();
+        //     // // }
+        //     // // return users;
+        //     // return await PagedList<MemberForListDto>.CreateAsync(users, likesParams.PageNumber, likesParams.PageSize);
+        // }
+
     }
 }

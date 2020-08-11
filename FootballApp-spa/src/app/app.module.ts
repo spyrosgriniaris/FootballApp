@@ -40,6 +40,7 @@ import { PlayerCardComponent } from './players/player-card/player-card.component
 import { PlayerDetailComponent } from './players/player-detail/player-detail.component';
 import { PlayerEditComponent } from './players/player-edit/player-edit.component';
 import { PhotoEditorComponent } from './players/photo-editor/photo-editor.component';
+import { PositionsModalComponent } from './players/positions-modal/positions-modal.component';
 
 
 
@@ -67,7 +68,8 @@ export function tokenGetter() {
       PlayerDetailComponent,
       PlayerEditComponent,
       PhotoEditorComponent,
-      LikesComponent
+      LikesComponent,
+      PositionsModalComponent
    ],
    imports: [
       BrowserModule,

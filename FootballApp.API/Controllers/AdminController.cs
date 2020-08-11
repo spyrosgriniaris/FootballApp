@@ -54,7 +54,7 @@ namespace FootballApp.API.Controllers
             var userRoles = await _userManager.GetRolesAsync(user);
 
             var selectedRoles = roleEditDto.RoleNames;
-             selectedRoles = selectedRoles != null ? selectedRoles : new string[] {};
+            selectedRoles = selectedRoles != null ? selectedRoles : new string[] {};
             //selectedRoles = selectedRoles ?? new string[] {};
 
             var result = await _userManager.AddToRolesAsync(user, selectedRoles.Except(userRoles));

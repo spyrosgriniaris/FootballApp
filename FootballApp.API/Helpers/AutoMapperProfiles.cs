@@ -17,6 +17,8 @@ namespace FootballApp.API.Helpers
                 .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.isMain).Url))
                 .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
 
+            CreateMap<MemberForListDto, User>();
+
             CreateMap<Photo, PhotosForDetailedDto>();
 
             CreateMap<MemberForUpdateDto, User>();
@@ -26,6 +28,10 @@ namespace FootballApp.API.Helpers
             CreateMap<PhotoForCreationDto, Photo>();
 
             CreateMap<UserForRegisterDto, User>();
+
+            CreateMap<PlayerPosition, PositionNameReceiveDto>();
+
+            CreateMap<PlayerPosition, PositionForDetailDto>();
        }
     }
 }

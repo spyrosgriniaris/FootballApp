@@ -62,6 +62,28 @@ export class MemberService {
     );
   }
 
+  getRanking(page?, itemsPerPage?): Observable<PaginatedResult<User[]>> {
+
+    const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
+    let params = new HttpParams();
+
+    if (page != null && itemsPerPage != null) {
+      params = params.append('pageNumber', page);
+      params.append('pageSize', itemsPerPage);
+    }
+
+    return this.http.get<User[]>(this.baseUrl + 'members/GetRanking', { observe: 'response', params})
+    .pipe(
+      map(response => {
+        paginatedResult.result = response.body;
+        if (response.headers.get('Pagination') != null){
+          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+        }
+        return paginatedResult;
+      })
+    );
+  }
+
   getUser(id: number): Observable<User> {
     return this.http.get<User>(this.baseUrl + 'members/' + id);
   }
@@ -80,6 +102,16 @@ export class MemberService {
 
   sendLike(id: number, recipientId: number) {
     return this.http.post(this.baseUrl + 'members/' + id + '/like/' + recipientId, {});
+  }
+
+  getUserWithPositions(userId: number) {
+    return this.http.get(this.baseUrl + 'admin/usersWithRoles');
+  }
+
+  updateUserPositions(user: User, positions: {}) {
+    console.log(user.userName);
+    console.log(positions);
+    return this.http.post(this.baseUrl + 'members/' + user.id + '/UpdatePositions', positions);
   }
 
 }

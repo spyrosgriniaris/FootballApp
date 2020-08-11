@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FootballApp.API.Models;
 
 namespace FootballApp.API.Dtos
 {
@@ -19,5 +20,6 @@ namespace FootballApp.API.Dtos
         public string Country { get; set; }
         public string PhotoUrl { get; set; } //main photo
         public ICollection<PhotosForDetailedDto> Photos { get; set; }
+        public ICollection<PositionForDetailDto> Positions;
     }
 }

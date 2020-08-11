@@ -15,6 +15,7 @@ namespace FootballApp.API.Data
          public DbSet<Value> Values {get; set;}
          public DbSet<Photo> Photo { get; set; }
          public DbSet<Like> Likes { get; set; }
+         public DbSet<PlayerPosition> Positions { get; set; }
         //  public DbSet<User> Users {get; set;}
 
         protected override void OnModelCreating(ModelBuilder builder) {
@@ -34,6 +35,7 @@ namespace FootballApp.API.Data
                 .IsRequired();
             });
 
+
             // Many to many functionality for Likes
             builder.Entity<Like>()
                 .HasKey(k => new {k.LikerId, k.LikeeId});
@@ -48,6 +50,11 @@ namespace FootballApp.API.Data
                 .WithMany(u => u.Likees)
                 .HasForeignKey(u => u.LikerId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<PlayerPosition>()
+            .HasOne(u => u.User)
+            .WithMany(p => p.Positions)
+            .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -46,11 +46,27 @@
           <tab heading="Edit Profile">
             <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
               <h4>Description</h4>
-              <textarea name="introduction" rows="6" class="form-control" [(ngModel)]="user.introduction"></textarea>
+              <textarea name="introduction" rows="2" class="form-control" [(ngModel)]="user.introduction"></textarea>
               <h4>Looking For</h4>
-              <textarea name="lookingFor" rows="6" class="form-control" [(ngModel)]="user.lookingFor"></textarea>
+              <textarea name="lookingFor" rows="2" class="form-control" [(ngModel)]="user.lookingFor"></textarea>
               <h4>Interests</h4>
-              <textarea name="interests" rows="6" class="form-control" [(ngModel)]="user.interests"></textarea>
+              <textarea name="interests" rows="2" class="form-control" [(ngModel)]="user.interests"></textarea>
+              <h4>Teams</h4>
+              <textarea name="teams" rows="1" class="form-control"></textarea>
+              <div style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px;">
+                <h4>Position</h4>
+                <button class="btn btn-primary" (click)="editPositionModal(user)" type="button">Choose Position</button>
+                <div class="position-wrapper">
+                  <h5><span *ngFor="let position of positionsToDisplay"
+                  class="position-badges badge"
+                 [ngClass]="{'badge-warning':position === 'Goalkeeper',
+                             'badge-danger':position === 'Striker',
+                             'badge-primary':position === 'Defender',
+                             'badge-secondary':position === 'Midfielder'
+                          }">{{position}}</span></h5>
+                </div>
+                
+              </div>
               <h4>Location Details:</h4>
               <div class="form-inline">
                 <label for="city">City</label>

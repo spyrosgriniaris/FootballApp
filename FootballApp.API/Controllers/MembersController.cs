@@ -10,6 +10,7 @@ using FootballApp.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace FootballApp.API.Controllers
 {
@@ -22,11 +23,13 @@ namespace FootballApp.API.Controllers
         private readonly IMemberRepository _memberRepo;
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
-        public MembersController(IMemberRepository memberRepo, UserManager<User> userManager, IMapper mapper)
+        private readonly DataContext _context;
+        public MembersController(IMemberRepository memberRepo, UserManager<User> userManager, IMapper mapper, DataContext context)
         {
             _mapper = mapper;
             _userManager = userManager;
             _memberRepo = memberRepo;
+            _context = context;
         }
 
         [HttpGet]
@@ -97,16 +100,89 @@ namespace FootballApp.API.Controllers
 
             _memberRepo.Add<Like>(like);
 
-            if(await _memberRepo.SaveAll())
+            
+
+            if(await _memberRepo.SaveAll()) {
+                await UpdateTotalLikes(recipientId);
                 return Ok();
+            }
+                
             
             return BadRequest("Failed to like user");
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateTotalLikes(int recipientId) {
+            // update TotalLikes of recipient
+            var recipient = _memberRepo.GetUser(recipientId);
+            recipient.Result.TotalLikes = recipient.Result.TotalLikes + 1;
+            if(await _memberRepo.SaveAll())
+                return Ok();
+            return BadRequest("Could not update TotalLikes");
+        }
+        
+        [HttpGet("GetRanking")]
+        public async Task<IActionResult> GetRanking([FromQuery] LikesParams likesParams) {
+            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await _memberRepo.GetUser(currentUserId);
+            
+            var users = await _memberRepo.GetUsersForLikes(likesParams);
+     
+            Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
+
+            return Ok(users);
+  
         }
 
         [HttpGet("SearchUsers/{searchWord}")]
         public async Task<IActionResult> SearchUsers(string searchWord) {
             var searchResult = await _memberRepo.SearchUsers(searchWord);
             return Ok(searchResult);
+        }
+    
+        [HttpGet("{id}/GetUserWithPositions")]
+        public async Task<IActionResult> GetUserWithPositions(int userId) {
+            var user = await _memberRepo.GetUserWithPositions(userId);
+            return Ok(user);
+        }
+
+        [HttpPost("{userId}/UpdatePositions")]
+        public async Task<IActionResult> UpdatePositions(int userId, PositionEditDto positionEditDto) {
+            // user including position
+            var user = await _memberRepo.GetUserWithPositions(userId);
+
+            var userPositions = user.Positions.ToList();
+
+            var positionsToReturn = _mapper.Map<IEnumerable<PositionNameReceiveDto>>(userPositions);
+
+            List<string> userListPositions = new List<string>();
+
+            foreach(var position in positionsToReturn) {
+                userListPositions.Add(position.Position);
+            }
+
+            var positionsToUpdate = positionEditDto.PositionNames;
+
+            var positionsToAdd = positionsToUpdate.Except(userListPositions).ToList();
+
+            var positionsToRemove = userListPositions.Except(positionsToUpdate).ToList();
+
+            // add new positions
+            for(int i = 0; i < positionsToAdd.Count(); i++) {
+                _memberRepo.Add<PlayerPosition>(new PlayerPosition {
+                    UserId = user.Id,
+                    Position = positionsToAdd[i]
+                });
+            }
+
+            // remove positions that are not in user's checklist
+            for(int i = 0; i < positionsToRemove.Count(); i++) {
+                var pos = user.Positions.Where(u => u.UserId == user.Id && u.Position == positionsToRemove[i].ToString()).FirstOrDefault();
+                user.Positions.Remove(pos);
+            }
+            await _memberRepo.SaveAll();
+
+            return Ok(positionsToRemove);
         }
     }
 }

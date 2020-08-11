@@ -17,4 +17,6 @@ export interface User {
     lookingFor?: string;
     photos?: Photo[];
     roles?: string[];
+    totalLikes?: number;
+    positions?: string[];
 }

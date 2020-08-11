@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Edit Positions for {{user.userName}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form #rolesForm="ngForm" id="positionsForm">
+    <div class="form-check" *ngFor="let position of positions">
+      <input type="checkbox" 
+        class="form-check-input" 
+        value="{{position.name}}" 
+        [checked]="position.checked"
+        (change)="position.checked = !position.checked">
+      <label>{{position.name}}</label>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
+  <button type="button" class="btn btn-success" (click)="updatePositions()" form="positionsForm">Submit</button>
+  <!-- form stands for submitting the form with button that is outside the form tag -->
+</div>
