@@ -14,7 +14,7 @@ namespace FootballApp.API.Data
         //  Task<IEnumerable<User>> GetUsers();
         Task<PagedList<User>> GetUsers(UserParams userParams);
         Task<PagedList<User>> GetUsersForLikes(LikesParams likesParams);
-         Task<User> GetUser(int id);
+         Task<User> GetUser(int id, bool isCurrentUser);
          Task<Photo> GetPhoto(int id);
          Task<Photo> GetMainPhotoForUser(int userId);
          Task<Like> GetLike(int userId, int recipientId);

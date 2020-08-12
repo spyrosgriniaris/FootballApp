@@ -23,7 +23,7 @@ namespace FootballApp.API.Helpers
             var resultContext = await next();
             var userId = int.Parse(resultContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
             var repo = resultContext.HttpContext.RequestServices.GetService<IMemberRepository>();
-            var user = await repo.GetUser(userId);
+            var user = await repo.GetUser(userId, true);
             user.LastActive = DateTime.UtcNow.ToLocalTime();
             await repo.SaveAll();
         }

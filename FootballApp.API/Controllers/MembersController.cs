@@ -41,7 +41,7 @@ namespace FootballApp.API.Controllers
             // filtering for not showing loggedIn user's profile
             if(User.Identity.IsAuthenticated){
                 var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-                var userFromRepo = await _memberRepo.GetUser(currentUserId);
+                var userFromRepo = await _memberRepo.GetUser(currentUserId, true);
                 userParams.UserId = currentUserId;
 
                 if (string.IsNullOrEmpty(userParams.Gender)) {
@@ -67,7 +67,14 @@ namespace FootballApp.API.Controllers
         [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
-            var user = await _memberRepo.GetUser(id);
+            var isCurrentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var isCurrentUser = false;
+
+            if (isCurrentUserId == id) {
+                isCurrentUser = true;
+            }
+
+            var user = await _memberRepo.GetUser(id, isCurrentUser);
 
             var userToReturn = _mapper.Map<MemberForDetailedDto>(user);
 
@@ -79,7 +86,7 @@ namespace FootballApp.API.Controllers
             // check if parameter's id equals the id that is part of the token
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
-            var userFromRepo = await _memberRepo.GetUser(id);
+            var userFromRepo = await _memberRepo.GetUser(id, true);
 
             _mapper.Map(memberForUpdateDto, userFromRepo);
 
@@ -101,7 +108,7 @@ namespace FootballApp.API.Controllers
             if(like != null)
                 return BadRequest("You already like the user");
             
-            if(await _memberRepo.GetUser(recipientId) == null)
+            if(await _memberRepo.GetUser(recipientId, false) == null)
                 return NotFound();
             like = new Like {
                 LikerId = id,
@@ -124,7 +131,7 @@ namespace FootballApp.API.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateTotalLikes(int recipientId) {
             // update TotalLikes of recipient
-            var recipient = _memberRepo.GetUser(recipientId);
+            var recipient = _memberRepo.GetUser(recipientId, false);
             recipient.Result.TotalLikes = recipient.Result.TotalLikes + 1;
             if(await _memberRepo.SaveAll())
                 return Ok();
@@ -134,7 +141,7 @@ namespace FootballApp.API.Controllers
         [HttpGet("GetRanking")]
         public async Task<IActionResult> GetRanking([FromQuery] LikesParams likesParams) {
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var userFromRepo = await _memberRepo.GetUser(currentUserId);
+            var userFromRepo = await _memberRepo.GetUser(currentUserId, false);
             
             var users = await _memberRepo.GetUsersForLikes(likesParams);
      

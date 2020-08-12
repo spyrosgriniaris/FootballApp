@@ -55,6 +55,8 @@ namespace FootballApp.API.Data
             .HasOne(u => u.User)
             .WithMany(p => p.Positions)
             .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Photo>().HasQueryFilter(p => p.isApproved);
         }
     }
 }

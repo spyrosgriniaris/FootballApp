@@ -12,6 +12,7 @@ namespace FootballApp.API.Models
         // to response from cloudinary has a public id
         public string PublicId { get; set; }
         //=============================================
+        public bool isApproved { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
     }

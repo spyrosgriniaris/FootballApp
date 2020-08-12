@@ -36,9 +36,13 @@ namespace FootballApp.API.Data.Members
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<User> GetUser(int id)
+        public async Task<User> GetUser(int id, bool isCurrentUser)
         {
-            var user = await _userManager.Users.Include(p => p.Photos).Include(p => p.Positions).FirstOrDefaultAsync(u => u.Id == id);
+            var query = _context.Users.Include(p => p.Photos).AsQueryable();
+
+            if (isCurrentUser)
+                query = query.IgnoreQueryFilters();
+            var user = await query.FirstOrDefaultAsync(u => u.Id == id);
             // var user = await _userManager.FindByIdAsync(id.ToString());
             return user;
         }
@@ -93,7 +97,7 @@ namespace FootballApp.API.Data.Members
         }
 
         public async Task<Photo> GetPhoto(int id) {
-            var photo = await _context.Photo.FirstOrDefaultAsync(p => p.Id == id);
+            var photo = await _context.Photo.IgnoreQueryFilters().FirstOrDefaultAsync(p => p.Id == id);
 
             return photo;
         }

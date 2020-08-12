@@ -62,7 +62,7 @@ namespace FootballApp.API.Controllers
             //check if id of logged user equals if of route
             User user = await _userManager.GetUserAsync(User);
 
-            var memberFromRepo = await _memberRepository.GetUser(user.Id);
+            var memberFromRepo = await _memberRepository.GetUser(user.Id, true);
 
             if(memberFromRepo == null)
                 return Unauthorized();
@@ -112,7 +112,7 @@ namespace FootballApp.API.Controllers
 
             User user = await _userManager.GetUserAsync(User);
 
-            var memberFromRepo = await _memberRepository.GetUser(user.Id);
+            var memberFromRepo = await _memberRepository.GetUser(user.Id, true);
 
             if(memberFromRepo == null)
                 return Unauthorized();
@@ -138,7 +138,7 @@ namespace FootballApp.API.Controllers
         public async Task<IActionResult> DeletePhoto(int userId, int id){
             User user = await _userManager.GetUserAsync(User);
 
-            var memberFromRepo = await _memberRepository.GetUser(user.Id);
+            var memberFromRepo = await _memberRepository.GetUser(user.Id, true);
 
             if(memberFromRepo == null)
                 return Unauthorized();
