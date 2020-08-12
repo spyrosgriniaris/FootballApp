@@ -9,11 +9,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users">
+      <tr *ngFor="let user of users"
+          [ngClass] ="{
+            'table-success' : user.id == currentUserId
+          }">
         <td>{{user.knownAs}}</td>
         <td>Aek FC</td>
         <td>{{user.totalLikes}}</td>
-        <td><button class="btn btn-primary">Vote</button></td>
+        <td><button class="btn btn-primary" [disabled]="user.id == currentUserId" (click)="sendLike(user.id, user.knownAs)">Vote <span class="fa fa-thumbs-up"></span></button></td>
       </tr>
     </tbody>
   </table>

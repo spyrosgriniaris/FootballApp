@@ -45,16 +45,16 @@
         <tabset class="member-tabset">
           <tab heading="Edit Profile">
             <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
-              <h4>Description</h4>
-              <textarea name="introduction" rows="2" class="form-control" [(ngModel)]="user.introduction"></textarea>
-              <h4>Looking For</h4>
-              <textarea name="lookingFor" rows="2" class="form-control" [(ngModel)]="user.lookingFor"></textarea>
-              <h4>Interests</h4>
-              <textarea name="interests" rows="2" class="form-control" [(ngModel)]="user.interests"></textarea>
-              <h4>Teams</h4>
+              <h5>Description</h5>
+              <textarea name="introduction" rows="1" class="form-control" [(ngModel)]="user.introduction"></textarea>
+              <h5>Looking For</h5>
+              <textarea name="lookingFor" rows="1" class="form-control" [(ngModel)]="user.lookingFor"></textarea>
+              <h5>Interests</h5>
+              <textarea name="interests" rows="1" class="form-control" [(ngModel)]="user.interests"></textarea>
+              <h5>Teams</h5>
               <textarea name="teams" rows="1" class="form-control"></textarea>
+              <h5>Position</h5>
               <div style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px;">
-                <h4>Position</h4>
                 <button class="btn btn-primary" (click)="editPositionModal(user)" type="button">Choose Position</button>
                 <div class="position-wrapper">
                   <h5><span *ngFor="let position of positionsToDisplay"
@@ -65,14 +65,76 @@
                              'badge-secondary':position === 'Midfielder'
                           }">{{position}}</span></h5>
                 </div>
-                
               </div>
-              <h4>Location Details:</h4>
-              <div class="form-inline">
-                <label for="city">City</label>
-                <input class="form-control" type="text" name="city" [(ngModel)]="user.city">
-                <label for="country">Country</label>
-                <input class="form-control" type="text" name="country" [(ngModel)]="user.country">
+              <h5>Location Details</h5>
+              <div style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px;">
+                <div class="row">
+                  <div class="col lg-4 col-md-4">
+                    <label for="city">City</label>
+                  </div>
+                  <div class="col-lg-8 col-md-8">
+                    <input class="form-control" type="text" name="city" [(ngModel)]="user.city">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col lg-4 col-md-4">
+                    <label for="country">Country</label>
+                  </div>
+                  <div class="col-lg-8 col-md-8">
+                    <input class="form-control" type="text" name="country" [(ngModel)]="user.country">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col lg-4 col-md-4">
+                    <label for="placeOfBirth">Place Of Birth</label>
+                  </div>
+                  <div class="col-lg-8 col-md-8">
+                    <input class="form-control" type="text" name="placeOfBirth" [(ngModel)]="user.placeOfBirth">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col lg-4 col-md-4">
+                    <label for="citizenship">Citizenship</label>
+                  </div>
+                  <div class="col-lg-8 col-md-8">
+                    <input class="form-control" type="text" name="citizenship" [(ngModel)]="user.citizenship">
+                  </div>
+                </div>
+              </div>
+              <h5>General Information</h5>
+              <div style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px;">
+                <div class="row">
+                  <div class="col lg-4 col-md-4">
+                    <label for="fullName">FullName</label>
+                  </div>
+                  <div class="col-lg-8 col-md-8">
+                    <input class="form-control" type="text" name="fullName" [(ngModel)]="user.fullName">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col lg-4 col-md-4">
+                    <label for="currentClub">Current Club</label>
+                  </div>
+                  <div class="col-lg-8 col-md-8">
+                    <input class="form-control" type="text" name="currentClub" [(ngModel)]="user.currentClub">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col lg-4 col-md-4">
+                    <label for="height">Height</label>
+                  </div>
+                  <div class="col-lg-8 col-md-8">
+                    <input class="form-control" type="number" name="height" [(ngModel)]="user.height">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col lg-4 col-md-4">
+                    <label for="foot">Foot</label>
+                  </div>
+                  <div class="col-lg-8 col-md-8">
+                    <input class="form-control" type="text" name="foot" [(ngModel)]="user.foot">
+                  </div>
+                </div>
               </div>
             </form>
           </tab>

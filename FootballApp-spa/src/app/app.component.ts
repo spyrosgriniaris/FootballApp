@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthService } from './_services/auth.service';
 import { Subject, Subscription } from 'rxjs';
 import { Router, NavigationStart } from '@angular/router';
 import { User } from './_models/user';
+import { environment } from 'src/environments/environment';
 
-export let browserRefresh =false;
+export let browserRefresh = false;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,6 +18,10 @@ export class AppComponent {
   jwtHelper = new JwtHelperService();
   tokenChangedForRefresh = new Subject<string>();
   subscription: Subscription;
+
+  cookieLawSeen: boolean;
+  @ViewChild('cookieLaw')
+  cookieLawEl: any;
 
   constructor(private authService: AuthService,
               private router: Router){
@@ -40,5 +45,8 @@ export class AppComponent {
       this.authService.currentUser = user;
       this.authService.changeMemberPhoto(user.photoUrl);
     }
+    this.cookieLawSeen = this.cookieLawEl.cookieLawSeen;
   }
+
+  // cookies policy accept
 }

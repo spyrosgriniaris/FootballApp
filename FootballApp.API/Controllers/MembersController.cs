@@ -14,10 +14,13 @@ using System.Linq;
 
 namespace FootballApp.API.Controllers
 {
-    [ServiceFilter(typeof(LogUserActivity))]
+    
     [Route("api/[controller]")]
     [ApiController]
     [AllowAnonymous]
+    
+    [Authorize]
+    
     public class MembersController : ControllerBase
     {
         private readonly IMemberRepository _memberRepo;
@@ -36,13 +39,20 @@ namespace FootballApp.API.Controllers
         public async Task<IActionResult> GetUsers([FromQuery] UserParams userParams)
         {
             // filtering for not showing loggedIn user's profile
-            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var userFromRepo = await _memberRepo.GetUser(currentUserId);
-            userParams.UserId = currentUserId;
+            if(User.Identity.IsAuthenticated){
+                var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                var userFromRepo = await _memberRepo.GetUser(currentUserId);
+                userParams.UserId = currentUserId;
 
-             if (string.IsNullOrEmpty(userParams.Gender)) {
-                userParams.Gender = userFromRepo.Gender  == "male" ? "male" : "female";
+                if (string.IsNullOrEmpty(userParams.Gender)) {
+                    userParams.Gender = userFromRepo.Gender  == "male" ? "male" : "female";
+                }
             }
+            else {
+                userParams.Gender = "male";
+                userParams.UserId = 1;
+            }
+            
 
             var users = await _memberRepo.GetUsers(userParams);
 

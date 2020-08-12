@@ -19,6 +19,12 @@ namespace FootballApp.API.Dtos
         public string City { get; set; }
         public string Country { get; set; }
         public string PhotoUrl { get; set; } //main photo
+        public string FullName { get; set; }
+        public string PlaceOfBirth { get; set; }
+        public int Height { get; set; }
+        public string Citizenship { get; set; }
+        public string Foot { get; set; }
+        public string CurrentClub { get; set; }
         public ICollection<PhotosForDetailedDto> Photos { get; set; }
         public ICollection<PositionForDetailDto> Positions;
     }

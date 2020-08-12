@@ -14,6 +14,7 @@ import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov
 export class PlayerDetailComponent implements OnInit {
   @ViewChild('memberTabs', {static: true}) memberTabs: TabsetComponent;
   user: User;
+  positions: string[] = [];
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
 
@@ -25,6 +26,10 @@ export class PlayerDetailComponent implements OnInit {
     this.route.data.subscribe(data => {
       // tslint:disable-next-line: no-string-literal
       this.user =  data['user'];
+      // get positions
+      for (const position of this.user.positions) {
+        this.positions.push(position['position']);
+      }
 
       // messages area to navigate to messages tab
       this.route.queryParams.subscribe(
@@ -34,6 +39,8 @@ export class PlayerDetailComponent implements OnInit {
         this.memberTabs.tabs[selectedTab > 0 ? selectedTab : 0].active = true;
       });
     });
+
+    console.log(this.positions);
 
     this.galleryOptions = [
       {

@@ -7,5 +7,11 @@ namespace FootballApp.API.Dtos
         public string Interests { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        public string FullName { get; set; }
+        public string PlaceOfBirth { get; set; }
+        public int Height { get; set; }
+        public string Citizenship { get; set; }
+        public string Foot { get; set; }
+        public string CurrentClub { get; set; }
     }
 }

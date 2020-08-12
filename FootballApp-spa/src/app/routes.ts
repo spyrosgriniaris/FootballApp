@@ -24,11 +24,11 @@ export const appRoutes: Routes = [
         path: '',
         runGuardsAndResolvers: 'always',
         children: [
-            {path: 'players', component: PlayersListComponent, resolve: {users: PlayerListResolver}},
+            {path: 'players', component: PlayersListComponent, canActivate: [AuthGuard], resolve: {users: PlayerListResolver}},
             {path: 'players/:id', component: PlayerDetailComponent, resolve: {user: PlayerDetailResolver}},
             {path: 'member/edit', component: PlayerEditComponent, resolve: {user: PlayerEditResolver},
              canDeactivate: [PreventUnsavedChanges]},
-            {path: 'rank', component: RankComponent, resolve: {users: RankResolver}},
+            {path: 'rank', component: RankComponent, canActivate: [AuthGuard], resolve: {users: RankResolver}},
             {path: 'messages', component: MessagesComponent, canActivate: [AuthGuard]},
             {path: 'likes', component: LikesComponent, resolve: {users: LikesResolver}, canActivate: [AuthGuard]},
             {path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard], data: {roles: ['Admin']}},

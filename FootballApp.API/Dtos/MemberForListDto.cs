@@ -15,5 +15,11 @@ namespace FootballApp.API.Dtos
         public string Country { get; set; }
         public string PhotoUrl { get; set; } //user main photo
         public int TotalLikes { get; set; } = 0;
+        public string FullName { get; set; }
+        public string PlaceOfBirth { get; set; }
+        public int Height { get; set; }
+        public string Citizenship { get; set; }
+        public string Foot { get; set; }
+        public string CurrentClub { get; set; }
     }
 }

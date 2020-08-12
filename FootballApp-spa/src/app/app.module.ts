@@ -19,6 +19,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { CookieLawModule } from 'angular2-cookie-law';
 
 import { AppComponent } from './app.component';
 import { ValueComponent } from './value/value.component';
@@ -92,6 +93,7 @@ export function tokenGetter() {
       MatAutocompleteModule,
       MatFormFieldModule,
       FileUploadModule,
+      CookieLawModule,
       JwtModule.forRoot({
          config: {
             tokenGetter: tokenGetter,

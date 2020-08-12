@@ -47,12 +47,18 @@ export class PlayerEditComponent implements OnInit {
   }
 
   updateUser() {
-    this.memberService.updateUser(this.authService.decodedToken.nameid, this.user).subscribe(next => {
-      this.alertify.success('Profile updated successfully!');
-      this.editForm.reset(this.user);
-    }, error => {
-      this.alertify.error(error);
-    });
+    if (typeof this.user.height === 'number' || !this.user.height) {
+      if (!this.user.height) {
+        this.user.height = 0;
+      }
+      this.memberService.updateUser(this.authService.decodedToken.nameid, this.user).subscribe(next => {
+        this.alertify.success('Profile updated successfully!');
+        this.editForm.reset(this.user);
+      }, error => {
+        this.alertify.error(error);
+      });
+    }
+
   }
 
   updateMainPhoto(photoUrl){

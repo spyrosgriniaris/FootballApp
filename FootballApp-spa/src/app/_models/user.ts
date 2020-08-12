@@ -19,4 +19,10 @@ export interface User {
     roles?: string[];
     totalLikes?: number;
     positions?: string[];
+    fullName?: string;
+    placeOfBirth?: string;
+    height?: number;
+    citizenship?: string;
+    foot?: string;
+    currentClub?: string;
 }

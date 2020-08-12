@@ -1,6 +1,6 @@
 <div class="container mt-4">
   <div class="row">
-    <h1>{{user.knownAs}}'s Profile</h1>
+    <h2>{{user.knownAs}}'s Profile</h2>
   </div>
   <div class="row">
     <div class="col-sm-4">
@@ -40,14 +40,116 @@
         <tabset class="member-tabset" #memberTabs> 
           <!-- to reference einai gia ta minimata -->
           <tab heading="About {{user?.knownAs}}">
-            <h4>Description</h4>
-            <p>{{user.introduction}}</p>
-            <h4>Looking For</h4>
-            <p>{{user.lookingFor}}</p>
-          </tab>
-          <tab heading="Football">
-            <h4>Interests</h4>
-            <p>{{user.interests}}</p>
+            <h5>General Information</h5>
+              <div style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px;">
+                <div class="row">
+                  <div class="col lg-5 col-md-5">
+                    <label for="fullName">FullName: </label>
+                  </div>
+                  <div class="col-lg-7 col-md-7">
+                    <label *ngIf="!user.fullName" for="fullNameText"> - </label>
+                    <label for="fullNameText">{{user.fullName}}</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col lg-5 col-md-5">
+                    <label for="knownAs">Known As: </label>
+                  </div>
+                  <div class="col-lg-7 col-md-7">
+                    <label *ngIf="!user.knownAs" for="knownAsText"> - </label>
+                    <label for="knownAsText">{{user.knownAs}}</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col lg-5 col-md-5">
+                    <label for="placeOfBirth">Place of Birth: </label>
+                  </div>
+                  <div class="col-lg-7 col-md-7">
+                    <label *ngIf="!user.placeOfBirth" for="placeOfBirthText"> - </label>
+                    <label for="placeOfBirthText">{{user.placeOfBirth}}</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col lg-5 col-md-5">
+                    <label for="citizenship">Citizenship: </label>
+                  </div>
+                  <div class="col-lg-7 col-md-7">
+                    <label *ngIf="!user.citizenship" for="citizenshipText"> - </label>
+                    <label for="citizenshipText">{{user.citizenship}}</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col lg-5 col-md-5">
+                    <label for="age">Age: </label>
+                  </div>
+                  <div class="col-lg-7 col-md-7">
+                    <label *ngIf="!user.age" for="ageText"> - </label>
+                    <label for="ageText">{{user.age}}</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col lg-5 col-md-5">
+                    <label for="height">Height: </label>
+                  </div>
+                  <div class="col-lg-7 col-md-7">
+                    <label *ngIf="!user.height" for="heightText">  </label>
+                    <label for="heightText">{{user.height}}</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col lg-5 col-md-5">
+                    <label for="foot">Foot: </label>
+                  </div>
+                  <div class="col-lg-7 col-md-7">
+                    <label *ngIf="!user.foot" for="footText"> - </label>
+                    <label for="footText">{{user.foot}}</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col lg-5 col-md-5">
+                    <label for="positions">Positions: </label>
+                  </div>
+                  <div class="col-lg-7 col-md-7">
+                    <span class=" mr-1 badge" *ngFor="let position of positions"
+                    [ngClass]="
+                    {'badge-warning':position === 'Goalkeeper',
+                    'badge-danger':position === 'Striker',
+                    'badge-primary':position === 'Defender',
+                    'badge-secondary':position === 'Midfielder'
+                 }">{{position}}</span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col lg-5 col-md-5">
+                    <label for="currentClub">Current Club: </label>
+                  </div>
+                  <div class="col-lg-7 col-md-7">
+                    <label *ngIf="!user.currentClub" for="currentClubText"> - </label>
+                    <label for="currentClubText">{{user.currentClub}}</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col lg-5 col-md-5">
+                    <label for="clubsPlayed">Clubs Played at: </label>
+                  </div>
+                  <div class="col-lg-7 col-md-7">
+                    <label for="clubsPlayedText"> - </label>
+                  </div>
+                </div>
+              </div>
+
+            <h5 *ngIf="user.introduction" mt-3>Description</h5>
+            <div *ngIf="user.introduction" style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px;">
+              <p>{{user.introduction}}</p>
+            </div>
+            <h5 *ngIf="user.lookingFor" mt-3>Looking For</h5>
+            <div *ngIf="user.lookingFor" style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px;">
+              <p>{{user.lookingFor}}</p>
+            </div>
+            <h5 *ngIf="user.interests" mt-3>Interests</h5>
+            <div *ngIf="user.interests" style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px;">
+              <p>{{user.interests}}</p>
+            </div>
           </tab>
           <tab heading="Photos">
             <ngx-gallery style="display: inline-block; margin-bottom: 20px;" [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>

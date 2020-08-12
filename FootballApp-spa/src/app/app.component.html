@@ -139,6 +139,13 @@
 
   </div> <!--  end container-fluid  -->
 
+  <!-- cookies acceptance -->
+  <cookie-law #cookieLaw 
+              name="ng4CookieLaw"
+              (isSeen)="cookieLawSeen = $event"
+              learnMore="/false" 
+              target="_blank"></cookie-law>
+
 <script>
 // Script from W3 Schools  
 // When the user scrolls down 20px from the top of the document, show the button

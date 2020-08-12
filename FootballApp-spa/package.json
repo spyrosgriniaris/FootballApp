@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~9.1.11",
+    "@angular/animations": "^9.1.12",
     "@angular/cdk": "^9.2.4",
     "@angular/common": "~9.1.11",
     "@angular/compiler": "~9.1.11",
@@ -25,6 +25,7 @@
     "@auth0/angular-jwt": "^5.0.1",
     "@kolkov/ngx-gallery": "^1.2.3",
     "alertifyjs": "^1.13.1",
+    "angular2-cookie-law": "^6.2.0",
     "awesome": "0.0.7",
     "bootstrap": "^4.5.0",
     "bootswatch": "^4.5.0",

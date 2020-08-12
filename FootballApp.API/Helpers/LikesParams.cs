@@ -4,7 +4,7 @@ namespace FootballApp.API.Helpers
     {
         private const int MaxPageSize = 50;
         public int PageNumber { get; set; } = 1; // returns 1 unless requested something else
-        private int pageSize = 5;
+        private int pageSize = 15;
         public int PageSize
         {
             get { return pageSize; }

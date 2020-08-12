@@ -22,6 +22,12 @@ namespace FootballApp.API.Models
         public string City { get; set; }
         public string Country { get; set; }
         public int TotalLikes { get; set; }
+        public string FullName { get; set; }
+        public string PlaceOfBirth { get; set; }
+        public int Height { get; set; }
+        public string Citizenship { get; set; }
+        public string Foot { get; set; }
+        public string CurrentClub { get; set; }
         public ICollection<Photo> Photos { get; set; }
 
         public ICollection<UserRole> UserRoles { get; set; }
