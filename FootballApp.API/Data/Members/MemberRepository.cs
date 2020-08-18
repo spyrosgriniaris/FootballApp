@@ -120,6 +120,10 @@ namespace FootballApp.API.Data.Members
             if(!String.IsNullOrEmpty(userParams.SearchWord)) {
                 users = users.Where(u => u.NormalizedUserName.Contains(userParams.SearchWord.ToUpper()));
             }
+
+            if(!String.IsNullOrEmpty(userParams.City)) {
+                users = users.Where(u=> u.City.Equals(userParams.City));
+            }
             // end of additional filtering area
 
             // return users;

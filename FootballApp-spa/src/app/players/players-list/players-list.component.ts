@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/_models/user';
 import { AlertifyService } from 'src/app/_services/alertify.service';
@@ -17,11 +17,60 @@ export class PlayersListComponent implements OnInit {
   pagination: Pagination;
   genderList = [{value: 'male', display: 'Males'}, {value: 'female', display: 'Female'}];
   userParams: any = {};
-
-  // variables for search
-  // searchWord: string;
-  // suggestions$: Observable<User[]>;
-  // errorMessageForSearch: string;
+  // selectedCity: string;
+  cities: string[] =[
+    'Alabama',
+    'Alaska',
+    'Arizona',
+    'Arkansas',
+    'California',
+    'Colorado',
+    'Connecticut',
+    'Delaware',
+    'Florida',
+    'Georgia',
+    'Hawaii',
+    'Idaho',
+    'Illinois',
+    'Indiana',
+    'Iowa',
+    'Kansas',
+    'Kentucky',
+    'Louisiana',
+    'Maine',
+    'Maryland',
+    'Massachusetts',
+    'Michigan',
+    'Minnesota',
+    'Mississippi',
+    'Missouri',
+    'Montana',
+    'Nebraska',
+    'Nevada',
+    'New Hampshire',
+    'New Jersey',
+    'New Mexico',
+    'New York',
+    'North Dakota',
+    'North Carolina',
+    'Ohio',
+    'Oklahoma',
+    'Oregon',
+    'Pennsylvania',
+    'Rhode Island',
+    'South Carolina',
+    'South Dakota',
+    'Tennessee',
+    'Texas',
+    'Utah',
+    'Vermont',
+    'Virginia',
+    'Washington',
+    'West Virginia',
+    'Wisconsin',
+    'Wyoming',
+    'Chalkis'
+  ];
 
 
   constructor(private memberService: MemberService,
@@ -49,6 +98,7 @@ export class PlayersListComponent implements OnInit {
     this.userParams.defender = false;
     this.userParams.midfielder = false;
     this.userParams.striker = false;
+    this.userParams.city = '';
     // end of additional filtering area
   }
 
@@ -66,21 +116,18 @@ export class PlayersListComponent implements OnInit {
     );
   }
 
-  edw() {
-    console.log(this.userParams);
-  }
 
   pageChanged(event: any): void{
     this.pagination.currentPage = event.page;
     this.loadUsers();
   }
 
-  resetFilters() {
-    this.userParams.gender = this.user.gender === 'female' ? 'female' : 'male';
-    this.userParams.minAge = 18;
-    this.userParams.maxAge = 45;
-    this.loadUsers();
-  }
+  // resetFilters() {
+  //   this.userParams.gender = this.user.gender === 'female' ? 'female' : 'male';
+  //   this.userParams.minAge = 18;
+  //   this.userParams.maxAge = 45;
+  //   this.loadUsers();
+  // }
 
   searchUsers() {
     if (!this.userParams.searchWord) {

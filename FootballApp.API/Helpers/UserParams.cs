@@ -34,5 +34,6 @@ namespace FootballApp.API.Helpers
         public bool Midfielder { get; set; } = false;
         public bool Striker { get; set; } = false;
         // end of position filtering
+        public string City { get; set; }
     }
 }
