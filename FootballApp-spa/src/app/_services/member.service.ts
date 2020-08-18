@@ -36,8 +36,8 @@ export class MemberService {
       params = params.append('maxAge', userParams.maxAge);
       params = params.append('gender', userParams.gender);
       params = params.append('searchWord', userParams.searchWord);
+      params = params.append('city', userParams.city);
       if (userParams.goalkeeper) {
-        console.log('from service exw gk');
         params = params.append('goalkeeper', 'true');
       }
       if (userParams.defender) {
