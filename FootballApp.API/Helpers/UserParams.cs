@@ -18,7 +18,7 @@ namespace FootballApp.API.Helpers
 
          // additional filtering properties
         public int MinAge { get; set; } = 18;
-        public int MaxAge { get; set; } = 99;
+        public int MaxAge { get; set; } = 45;
         public string SearchWord { get; set; }
 
         // end of additional filtering properties
@@ -27,5 +27,12 @@ namespace FootballApp.API.Helpers
         public bool Likees { get; set; } = false;
         public bool Likers { get; set; } = false;
         // end of likes functionality
+
+        // position filtering
+        public bool Goalkeeper { get; set; } = false;
+        public bool Defender { get; set; } = false;
+        public bool Midfielder { get; set; } = false;
+        public bool Striker { get; set; } = false;
+        // end of position filtering
     }
 }

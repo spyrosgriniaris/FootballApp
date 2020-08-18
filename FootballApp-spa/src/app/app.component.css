@@ -63,3 +63,34 @@ font-weight: 400;
 margin-left: 0.1rem;
 list-style-type:square;
 }
+
+footer.footer{padding-top:4rem;padding-bottom:4rem}
+
+@media (min-width:768px){
+    header.masthead{padding-top:12rem;padding-bottom:12rem
+    }header.masthead h1{font-size:3rem}}
+.showcase .showcase-text{
+    padding:3rem}
+.showcase .showcase-img{
+    min-height:30rem;background-size:cover
+}
+@media (min-width:768px){
+    .showcase .showcase-text{padding:7rem}
+}
+
+.features-icons{
+    padding-top:7rem;
+    padding-bottom:7rem
+}
+.features-icons .features-icons-item{
+    max-width:20rem
+}
+.features-icons .features-icons-item .features-icons-icon{
+    height:7rem
+}
+.features-icons .features-icons-item .features-icons-icon i{
+    font-size:4.5rem
+}
+.features-icons .features-icons-item:hover .features-icons-icon i{
+    font-size:5rem
+}

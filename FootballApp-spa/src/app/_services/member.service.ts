@@ -36,6 +36,19 @@ export class MemberService {
       params = params.append('maxAge', userParams.maxAge);
       params = params.append('gender', userParams.gender);
       params = params.append('searchWord', userParams.searchWord);
+      if (userParams.goalkeeper) {
+        console.log('from service exw gk');
+        params = params.append('goalkeeper', 'true');
+      }
+      if (userParams.defender) {
+        params = params.append('defender', 'true');
+      }
+      if (userParams.midfielder) {
+        params = params.append('midfielder', 'true');
+      }
+      if (userParams.striker) {
+        params = params.append('striker', 'true');
+      }
     }
 
     // likes functionality
@@ -48,7 +61,7 @@ export class MemberService {
     {
       params = params.append('likees', 'true');
     }
-    // end of likes functionality
+  // end of likes functionality
 
     return this.http.get<User[]>(this.baseUrl + 'members', { observe: 'response', params})
     .pipe(

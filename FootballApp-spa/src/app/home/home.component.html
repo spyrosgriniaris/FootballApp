@@ -16,6 +16,152 @@
     </div>
   </div>
 </div> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Landing Page - Start Bootstrap Theme</title>
+
+  <!-- Bootstrap core CSS
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css"> --> -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <!-- <link href="css/landing-page.min.css" rel="stylesheet"> -->
+
+</head>
+
+<body>
+  <!-- Regiser form -->
+  <div *ngIf="registerMode" class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Masthead -->
+  <header *ngIf="!registerMode" class="masthead text-white text-center">
+    <div class="overlay"></div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5">Be the next player a team is looking for and play in a higher level!</h1>
+        </div>
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+          <button type="button" class="btn btn-block btn-lg btn-primary" (click)="registerToggle()">Sign up!</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Icons Grid -->
+  <section *ngIf="!registerMode" class="features-icons bg-light text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="icon-layers m-auto text-primary fa fa-futbol-o"></i>
+            </div>
+            <h3>Amateur Football</h3>
+            <p class="lead mb-0">We try to help amateur football players make themselves known!</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="icon-layers m-auto text-primary fa fa-info-circle"></i>
+            </div>
+            <h3>Player Info</h3>
+            <p class="lead mb-0">Our platform provides info, players made availiable for themselves!</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="icon-check m-auto text-primary fa fa-level-up"></i>
+            </div>
+            <h3>Scale up</h3>
+            <p class="lead mb-0">Be the most popular player among all, by gathering the most likes!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Showcases -->
+  <section *ngIf="!registerMode" class="showcase">
+    <div class="container-fluid p-0">
+      <div class="row no-gutters">
+
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('../../assets/showcase1.jpg');"></div>
+        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+          <h2>Build your Image Gallery</h2>
+          <br>
+          <p class="lead mb-0">Inside the application, you can easily upoad images that show you in action! Upload as many images as you want and select as your profile picture the best,
+            in order to have more chances to get picked by a coach!
+          </p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-lg-6 text-white showcase-img" style="background-image: url('../../assets/showcase2.jpg');"></div>
+        <div class="col-lg-6 my-auto showcase-text">
+          <h2>Share your Info</h2>
+          <p class="lead mb-0">Update your profile by providing information about the position you are playing, teams you have played and you current club. Make your current location 
+            availiable in order to help staff and coaches who are looking a player of your class to find you!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section *ngIf="!registerMode" class="call-to-action text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h2 class="mb-4">Ready to get started? Sign up now!</h2>
+        </div>
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+          <form>
+            <div class="row">
+              <div class="col text-center">
+                <button type="submit" (click)="registerToggle()" class="btn btn-block btn-lg btn-primary">Sign up!</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+</body>
+
+
+
+
+
+
+
+
+
+
+<!-- 
 <div class="jumbotron" *ngIf="!registerMode">
   <h1 class="display-3">Hello, world!</h1>
   <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
@@ -33,5 +179,5 @@
     </div>
   </div>
 </div>
-
+ -->
 

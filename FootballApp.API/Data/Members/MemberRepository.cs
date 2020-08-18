@@ -38,7 +38,7 @@ namespace FootballApp.API.Data.Members
 
         public async Task<User> GetUser(int id, bool isCurrentUser)
         {
-            var query = _context.Users.Include(p => p.Photos).AsQueryable();
+            var query = _context.Users.Include(p => p.Photos).Include(pos=> pos.Positions).AsQueryable();
 
             if (isCurrentUser)
                 query = query.IgnoreQueryFilters();
@@ -50,9 +50,47 @@ namespace FootballApp.API.Data.Members
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
             // querable is for filtering
-            var users = _userManager.Users.Include(p => p.Photos).AsQueryable();
+            var users = _userManager.Users.Include(p => p.Photos).Include(pos => pos.Positions).AsQueryable();
+            // position filtering
+            if(userParams.Goalkeeper) {
+                var usersWithGks = _userManager.Users.Include(p => p.Photos).Include(pos => pos.Positions).AsQueryable();
+                var gks = _context.Positions.Include(u=>u.User).Where(p=> p.Position == "Goalkeeper").Select(p=> p.UserId);
+                var goalkeepers = usersWithGks.Where(u=> gks.Contains(u.Id));
+                users = goalkeepers;
+                // users = users.Where(u=> gks.Contains(u.Id));
+            }
+            if(userParams.Defender) {
+                var usersWithDefs = _userManager.Users.Include(p => p.Photos).Include(pos => pos.Positions).AsQueryable();
+                var defs = _context.Positions.Include(u=>u.User).Where(p=> p.Position == "Defender").Select(p=> p.UserId);
+                var defenders = usersWithDefs.Where(u=> defs.Contains(u.Id));
+                if (userParams.Goalkeeper)
+                    users = users.Concat(defenders);
+                else 
+                    users = defenders;
+            }
+            if(userParams.Midfielder) {
+                var usersWithMids = _userManager.Users.Include(p => p.Photos).Include(pos => pos.Positions).AsQueryable();
+                var mids = _context.Positions.Include(u=>u.User).Where(p=> p.Position == "Midfielder").Select(p=> p.UserId);
+                var midfielders = usersWithMids.Where(u=> mids.Contains(u.Id));
+                if(userParams.Goalkeeper || userParams.Defender)
+                    users = users.Concat(midfielders);
+                else
+                    users = midfielders;
+            }
+            if(userParams.Striker) {
+                var usersWithStr = _userManager.Users.Include(p => p.Photos).Include(pos => pos.Positions).AsQueryable();
+                var str = _context.Positions.Include(u=>u.User).Where(p=> p.Position == "Striker").Select(p=> p.UserId);
+                var strikers = usersWithStr.Where(u=> str.Contains(u.Id));
+                if(userParams.Goalkeeper || userParams.Defender || userParams.Midfielder)
+                    users = users.Concat(strikers);
+                else
+                    users = strikers;
+            }
+            
 
-            // filtering not to show logged in user's profile
+            // end of position filtering
+
+            // // filtering not to show logged in user's profile
             users = users.Where(u => u.Id != userParams.UserId);
 
             users = users.Where(u => u.Gender == userParams.Gender);
@@ -72,7 +110,7 @@ namespace FootballApp.API.Data.Members
             // end of likes functionality
 
             // additional filtering area 
-            if (userParams.MinAge != 18 || userParams.MaxAge != 99){
+            if (userParams.MinAge != 18 || userParams.MaxAge != 45){
                 var minDoB = DateTime.Today.AddYears(-userParams.MaxAge - 1);// minDateOfBirth
                 var maxDoB = DateTime.Today.AddYears(-userParams.MinAge);
 
@@ -125,6 +163,7 @@ namespace FootballApp.API.Data.Members
                 return user.Likees.Where(u => u.LikerId == id).Select(i => i.LikeeId);
             }
         }
+
 
         public async Task<MembersForSearchDto> SearchUsers(string searchWord) {
             var users = _userManager.Users.AsQueryable();

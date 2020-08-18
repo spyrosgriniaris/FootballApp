@@ -1,72 +1,120 @@
 <!-- additional filtering area -->
-<div class="text-center mt-3">
+<!-- <div class="text-center mt-3">
   <h2>{{pagination.totalItems}} Players found</h2>
-</div>
+</div> -->
 
 <!-- end of additional filtering area -->
 
 
+<!-- Sidebar -->
+<div class="row">
+  <div class="col-lg-2 col-xl-2  filtersSideBar">
+    <!-- Section: Condition -->
+  <section filter="position" class="mb-4">
+    <h4 class="font-weight-bold mb-3">Filters</h4>
+      <form class="form" #form="ngForm" (ngSubmit)="loadUsers()" novalidate>
+        <hr>
+        <h6 class="mt-2">Position</h6>
+        <label class="container">Goalkeeper
+          <input type="checkbox" id="goalkeeper" name="goalkeeper" [(ngModel)]="userParams.goalkeeper" value="goalkeeper" (ngModelChange)="loadUsers()">
+          <span class="checkmark"></span>
+        </label>
+        <label class="container">Defender
+          <input type="checkbox" id="defender" name="defender" [(ngModel)]="userParams.defender" value="defender" (ngModelChange)="loadUsers()">
+          <span class="checkmark"></span>
+        </label>
+        <label class="container">Midfielder
+          <input type="checkbox" id="midfielder" name="midfielder" [(ngModel)]="userParams.midfielder" value="midfielder" (ngModelChange)="loadUsers()">
+          <span class="checkmark"></span>
+        </label>
+        <label class="container">Striker
+          <input type="checkbox" id="striker" name="striker" [(ngModel)]="userParams.striker" value="striker" (ngModelChange)="loadUsers()">
+          <span class="checkmark"></span>
+        </label>
+        <hr>
 
-<div class="container mt-3">
-  <!-- additional filtering area -->
-  <form class="form-inline" #form="ngForm" (ngSubmit)="loadUsers()" novalidate>
-    <div class="form-group">
-      <label for="minAge">Age From</label>
-      <input type="number" class="form-control ml-1" style="width: 70px" id="minAge" name="minAge"
-        [(ngModel)]="userParams.minAge">
-    </div>
+
+        <section filter="age" class="mb-4">
+          <h6 class="font-weight-bold mb-2">Age</h6>
+          <h6 class="mt-2">Age From: {{userParams.minAge}}</h6>
+          <input type="range" min="1" max="45" value="18" class="slider" id="minAge" name="minAge" [(ngModel)]="userParams.minAge" (ngModelChange)="loadUsers()"/>
+          <h6 class="mt-2">Age To: {{userParams.maxAge}}</h6>
+          <input type="range" min="1" max="45" value="45" class="slider" id="maxAge" name="maxAge" [(ngModel)]="userParams.maxAge" (ngModelChange)="loadUsers()"/>
+        </section>
+
+        <hr>
+
+        <section filter="Gender" class="mb-4">
+          <h6 class="font-weight-bold mb-2">Gender</h6>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="genderMale" id="genderMale" value="male" [(ngModel)]="userParams.gender" (ngModelChange)="loadUsers()" >
+            <label class="form-check-label" for="genderMale">
+              Male
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="genderFemale" id="genderFemale" value="female" [(ngModel)]="userParams.gender" (ngModelChange)="loadUsers()">
+            <label class="form-check-label" for="genderFemale">
+              Female
+            </label>
+          </div>
+        </section>
+
+        <hr>
+        
+        <section filter="City" class="mb-4">
+          <h6 class="font-weight-bold mb-2">City</h6>
+          <div class="form-group">
+            <div class="input-group md-form form-sm form-2 pl-0">
+              <input class="form-control my-0 py-1 amber-border" name="searchCity" type="text" placeholder="Search city" aria-label="Search city">
+              <div class="input-group-append">
+                <span class="input-group-text amber lighten-3" id="citySearch"><i class="fa fa-search text-grey"
+                    aria-hidden="true"></i></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr>
+    </form>
+  </section>
   
-    <div class="form-group px-2">
-      <label for="maxAge">Age To</label>
-      <input type="number" class="form-control ml-1" style="width: 70px" id="maxAge" name="maxAge"
-        [(ngModel)]="userParams.maxAge">
-    </div>
-  
-    <div class="form-group px-2">
-      <label for="gender">Show: </label>
-      <select class="form-control ml-1" style="width: 130px" id="gender" name="gender" [(ngModel)]="userParams.gender">
-        <option *ngFor="let gender of genderList" [value]="gender.value">
-          {{gender.display}}
-        </option>
-      </select>
-    </div>
-    <!-- <button type="submit" class="btn btn-primary" style="margin-left:10px">Apply Filters</button>
-    <button type="button" class="btn btn-info" style="margin-left:10px" (click)="resetFilters()">Reset Filter</button> -->
-    
-    <div class="form-group px-2">
-      <div class="input-group md-form form-sm form-2 pl-0">
-        <input class="form-control my-0 py-1 amber-border" [(ngModel)]="userParams.searchWord" name="searchWord" type="text" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <span class="input-group-text amber lighten-3" (click)="searchUsers()" id="basic-text1"><i class="fa fa-search text-grey"
-              aria-hidden="true"></i></span>
+  </div>
+  <div class="col-lg-10 col-xl-10">
+    <div class="row">
+      <div class="col-xl-8 col-lg-8 col-md-8">
+        <div class="card">
+          <div class="card-body">
+            There will be an advertisement!
+          </div>
         </div>
       </div>
-      <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      <i class="fa fa-search ml-2" aria-hidden="true"></i> -->
+      <div class="col-xl-4 col-lg-4 col-md-4">
+        <div class="form-group px-2">
+          <div class="input-group md-form form-sm form-2 pl-0">
+            <input class="form-control my-0 py-1 amber-border searchBar" [(ngModel)]="userParams.searchWord" name="searchWord" type="text" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+              <span class="input-group-text amber lighten-3" (click)="searchUsers()" id="basic-text1"><i class="fa fa-search text-grey"
+                  aria-hidden="true"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary" style="margin-left:10px">Apply Filters</button>
-    <button type="button" class="btn btn-info" style="margin-left:10px" (click)="resetFilters()">Reset Filter</button>
-  </form>
-  <br>
-</div>
-<div class="container mt-3">
-  <div class="row">
-    <div *ngFor="let user of users" class="col-lg-2 col-md-3 col-sm-6">
-      <app-player-card [user]="user"></app-player-card>
-    </div>
+    
+    <div class="container mt-3">
+      <div class="row">
+        <div *ngFor="let user of users" class="col-lg-2 col-md-3 col-sm-6">
+          <app-player-card [user]="user"></app-player-card>
+        </div>
+      </div>
+    </div>  
   </div>
-</div>  
-<!-- <pre class="card card-block card-header">Model: {{ searchWord | json }}</pre>
- 
-<input [(ngModel)]="searchWord"
-       typeaheadOptionField="login"
-       [typeahead]="suggestions$"
-       [typeaheadAsync]="true"
-       class="form-control"
-       placeholder="Enter username">
- 
-<div class="alert alert-danger" role="alert" *ngIf="errorMessageForSearch">
-  {{ errorMessageForSearch }} -->
+</div>
+
+<!-- /#sidebar-wrapper -->
+
+
 <!-- </div> -->
 <div class="d-flex justify-content-center">
   <pagination

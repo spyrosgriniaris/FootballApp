@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace FootballApp.API.Controllers
 {
@@ -18,7 +19,7 @@ namespace FootballApp.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [AllowAnonymous]
-    
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     
     public class MembersController : ControllerBase
@@ -137,6 +138,12 @@ namespace FootballApp.API.Controllers
                 return Ok();
             return BadRequest("Could not update TotalLikes");
         }
+
+        // [HttpGet("GetGks")]
+        // public IActionResult GetGks() {
+        //     var gks = _context.Positions.Include(u=>u.User).Where(p=> p.Position == "Striker").Select(p=> p.UserId);
+        //     return Ok(gks);
+        // }
         
         [HttpGet("GetRanking")]
         public async Task<IActionResult> GetRanking([FromQuery] LikesParams likesParams) {
