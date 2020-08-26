@@ -25,4 +25,7 @@ export interface User {
     citizenship?: string;
     foot?: string;
     currentClub?: string;
+    facebookUrl?: string;
+    instagramUrl: string;
+    twitterUrl?: string;
 }

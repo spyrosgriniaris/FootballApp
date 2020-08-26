@@ -102,6 +102,7 @@ export class MemberService {
   }
 
   updateUser(id: number, user: User){
+    // console.log(user);
     return this.http.put(this.baseUrl + 'members/' + id, user);
   }
 

@@ -1,6 +1,7 @@
 <nav id="mainNavbar" class="navbar navbar-expand-sm navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" [routerLink]="['/home']">Football App</a>
+    <a class="navbar-brand" *ngIf="loggedIn()" [routerLink]="['/players']">Football App</a>
+    <a class="navbar-brand" *ngIf="!loggedIn()" [routerLink]="['/home']">Football App</a>
     <button
       class="navbar-toggler"
       type="button"

@@ -42,6 +42,8 @@ import { PlayerDetailComponent } from './players/player-detail/player-detail.com
 import { PlayerEditComponent } from './players/player-edit/player-edit.component';
 import { PhotoEditorComponent } from './players/photo-editor/photo-editor.component';
 import { PositionsModalComponent } from './players/positions-modal/positions-modal.component';
+import { IsLoggedInDirective } from './_directives/isLoggedIn.directive';
+import { SocialMediaModalComponent } from './players/social-media-modal/social-media-modal.component';
 
 
 
@@ -63,6 +65,7 @@ export function tokenGetter() {
       RankComponent,
       AdminPanelComponent,
       HasRoleDirective,
+      IsLoggedInDirective,
       UserManagementComponent,
       PhotoManagementComponent,
       RolesModalComponent,
@@ -70,7 +73,8 @@ export function tokenGetter() {
       PlayerEditComponent,
       PhotoEditorComponent,
       LikesComponent,
-      PositionsModalComponent
+      PositionsModalComponent,
+      SocialMediaModalComponent
    ],
    imports: [
       BrowserModule,

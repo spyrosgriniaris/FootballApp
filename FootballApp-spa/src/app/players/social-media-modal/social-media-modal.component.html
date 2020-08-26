@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Edit Social Media Profiles</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form #socialMediaForm="ngForm" id="socialMediaForm">
+    <div class="form-group">
+      <label for="facebookUrl">Facebook</label>
+      <input type="text" class="form-control" name="facebookUrl" [(ngModel)]="facebookUrl" id="facebookUrl" value="{{user.facebookUrl}}">
+    </div>
+    <div class="form-group">
+      <label for="instagramUrl">Instagram</label>
+      <input type="text" class="form-control" name="instagramUrl" [(ngModel)]="instagramUrl" id="instagramUrl" value="{{user.instagramUrl}}">
+    </div>
+    <div class="form-group">
+      <label for="twitterUrl">Twitter</label>
+      <input type="text" class="form-control" name="twitterUrl" [(ngModel)]="twitterUrl" id="twitterUrl" value="{{user.twitterUrl}}">
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
+  <button type="button" class="btn btn-success" (click)="updateSocialMedia()" form="socialMediaForm">Submit</button>
+  <!-- form stands for submitting the form with button that is outside the form tag -->
+</div>

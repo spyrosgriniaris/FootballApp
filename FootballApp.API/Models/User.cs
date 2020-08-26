@@ -28,6 +28,9 @@ namespace FootballApp.API.Models
         public string Citizenship { get; set; }
         public string Foot { get; set; }
         public string CurrentClub { get; set; }
+        public string FacebookUrl { get; set; }
+        public string InstagramUrl { get; set; }
+        public string TwitterUrl { get; set; }
         public ICollection<Photo> Photos { get; set; }
 
         public ICollection<UserRole> UserRoles { get; set; }

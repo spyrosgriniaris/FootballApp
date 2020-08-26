@@ -9,8 +9,25 @@
         <img class="card-img-top img-thumbnail" src="{{user.photoUrl}}" alt="{{user.knownAs}}">
         <div class="card-body">
           <div>
-            <strong>Location:</strong>
-            <p>{{user.city}}, {{user?.country}}</p>
+            <div class="row">
+              <div class="col-sm-7 col-md-7 col-lg-7">
+                <strong>Location:</strong>
+                <p>{{user.city}}, {{user?.country}}</p>
+              </div>
+              <div class="col-sm-5 col-md-5 col-lg-5">
+                <ul>
+                  <li *ngIf="user.facebookUrl">
+                    <a href="{{user?.facebookUrl}}"><i class="fa fa-facebook-f icon"></i></a>
+                  </li>
+                  <li *ngIf="user.instagramUrl">
+                    <a href="{{user?.instagramUrl}}"><i class="fa fa-instagram icon"></i></a>
+                  </li>
+                  <li *ngIf="user.twitterUrl">
+                    <a href="{{user?.twitterUrl}}"><i class="fa fa-twitter icon"></i></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
           <div>
             <strong>Age:</strong>

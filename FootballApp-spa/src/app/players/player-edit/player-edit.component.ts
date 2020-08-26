@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { PositionsModalComponent } from '../positions-modal/positions-modal.component';
+import { SocialMediaModalComponent } from '../social-media-modal/social-media-modal.component';
 
 @Component({
   selector: 'app-player-edit',
@@ -63,6 +64,28 @@ export class PlayerEditComponent implements OnInit {
 
   updateMainPhoto(photoUrl){
     this.user.photoUrl = photoUrl;
+  }
+
+  editSocialMedia(user: User) {
+    const initialState = {
+      user
+    };
+    this.bsModalRef = this.modalService.show(SocialMediaModalComponent, {initialState});
+    this.bsModalRef.content.updateSocialMediaEmitter.subscribe(
+      (socialMediaArray: string[]) => {
+        this.user.facebookUrl = socialMediaArray[0];
+        this.user.instagramUrl = socialMediaArray[1];
+        this.user.twitterUrl = socialMediaArray[2];
+        console.log('edw');
+        this.memberService.updateUser(this.authService.decodedToken.nameid, this.user).subscribe(
+          next => {
+            this.alertify.success('Social Media Updated!');
+          }, error => {
+            this.alertify.error(error);
+          }
+        );
+      }
+    );
   }
 
   editPositionModal(user: User) {
