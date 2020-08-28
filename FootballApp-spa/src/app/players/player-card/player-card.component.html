@@ -1,4 +1,4 @@
-<div class="card mb-4 mt-5">
+<div class="card shadow-lg bg-white rounded mb-4 mt-5">
   <div class="card-img-wrapper">
      <!-- to || prostethike gia na diorthwthei to lathos me tous neous eggegrammenous xristes -->
     <img class="card-img-top" src="{{user.photoUrl || '../../../../../assets/user.png'}}" alt="{{user.knownAs}}">
@@ -8,7 +8,7 @@
       <!-- <li class="list-inline-item"><button class="btn btn-primary btn-sm" [routerLink]="['/players/', user.id]" [queryParams]="{tab: 3}" ><i class="fa fa-envelope"></i></button></li> -->
     </ul>
   </div>
-  <div class="card-body p-1">
+  <div class="card-body p-1" style="background-color: #d1e0e0;">
     <h6 class="card-title text-center mb-1"><i class="fa fa-user"> {{user.knownAs}}, {{user.age}}</i></h6>
     <p class="card-text text-muted text-center">{{user.city}}
       <span *ngIf="isNew" class="badge badge badge-pill badge-primary">new</span>

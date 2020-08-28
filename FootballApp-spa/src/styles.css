@@ -38,6 +38,7 @@
   .member-tabset > .nav-tabs > li.active > a {
     border: 0 !important;
     color: #333333;
+    background-color: #E3E3E3;
   }
   
   .member-tabset > .nav-tabs > li.active > a > i {
@@ -46,7 +47,7 @@
   
   .member-tabset > .tab-content {
     margin-top: -3px;
-    background-color: #fff;
+    background-color: #E3E3E3;
     border: 0;
     border-top: 1px solid #eee;
     padding: 15px 0;

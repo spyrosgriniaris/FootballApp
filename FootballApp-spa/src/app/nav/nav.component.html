@@ -1,7 +1,7 @@
 <nav id="mainNavbar" class="navbar navbar-expand-sm navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" *ngIf="loggedIn()" [routerLink]="['/players']">Football App</a>
-    <a class="navbar-brand" *ngIf="!loggedIn()" [routerLink]="['/home']">Football App</a>
+    <a class="navbar-brand" *ngIf="loggedIn()" [routerLink]="['/players']"><img src="../../assets/logo.png" width="200px" alt=""></a>
+    <a class="navbar-brand" *ngIf="!loggedIn()" [routerLink]="['/home']"><img src="../../assets/logo.png" width="200px" alt=""></a>
     <button
       class="navbar-toggler"
       type="button"

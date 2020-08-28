@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using AutoMapper;
 using FootballApp.API.Data;
 using FootballApp.API.Data.Members;
@@ -84,13 +87,11 @@ namespace FootballApp.API
                         ValidateAudience = false
                     };
                 });
-            services.AddScoped<LogUserActivity>();
-            
-            
+            services.AddScoped<LogUserActivity>();    
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,  IServiceProvider services)
         {
             if (env.IsDevelopment())  
             {
@@ -124,5 +125,6 @@ namespace FootballApp.API
                 endpoints.MapControllers();
             });
         }
+       
     }
 }

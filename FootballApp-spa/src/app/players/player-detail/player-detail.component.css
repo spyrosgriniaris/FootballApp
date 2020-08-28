@@ -17,7 +17,8 @@
 body {
     margin: 0;
     padding:0;
-    background: #262626;
+    /* background: #262626; */
+    background-color: #b9cad1;
   }
   
   ul {
@@ -39,7 +40,7 @@ body {
     text-align: center;
     line-height: 40px;
     font-size: 25px;
-    margin: 0 10px;
+    margin: 0 5px;
     display: block;
     border-radius: 50%;
     position: relative;
@@ -88,4 +89,9 @@ body {
   ul li:nth-child(2) a:before {
     background: #2C6A93;
   }
+
+.container {
+  min-height: 95%;
+
+}
   

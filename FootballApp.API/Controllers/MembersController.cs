@@ -28,6 +28,7 @@ namespace FootballApp.API.Controllers
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly DataContext _context;
+        // private RoleManager<IdentityRole> _roleManager;
         public MembersController(IMemberRepository memberRepo, UserManager<User> userManager, IMapper mapper, DataContext context)
         {
             _mapper = mapper;
@@ -99,7 +100,6 @@ namespace FootballApp.API.Controllers
 
         [HttpPost("{id}/like/{recipientId}")]
         public async Task<IActionResult> LikeUser(int id, int recipientId) {
-
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             if(id != currentUserId)
                 return Unauthorized();

@@ -22,10 +22,11 @@
 }
 
 body {
-    margin: 0;
-    padding:0;
-    background: #262626;
-  }
+  margin: 0;
+  padding:0;
+  /* background: #262626; */
+  background-color: #b9cad1;
+}
   
   ul {
     display: flex;

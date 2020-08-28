@@ -1,167 +1,174 @@
-<div class="container mt-4">
-  <div class="row">
-    <div class="col-sm-4">
-      <h1>Your Profile</h1>
-    </div>
-    <div class="col-sm-8">
-      <div *ngIf="editForm.dirty" class="alert alert-info">
-        <strong>Information:</strong>You have made changes. Any unsaved changes will be lost!
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <h1 class="mt-4">Your Profile</h1>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-4">
-      <!-- general info including the photo -->
-      <div class="card">
-        <!-- <img class="card-img-top img-thumbnail" src="{{user.photoUrl}}" alt="{{user.knownAs}}"> -->
-        <img class="card-img-top img-thumbnail" src="{{photoUrl || user.photoUrl || '../../../../../assets/user.png'}}" alt="{{user.knownAs}}">
-        <div class="card-body">
-          <div>
-            <strong>Location:</strong>
-            <p>{{user.city}}, {{user?.country}}</p>
-          </div>
-          <div>
-            <strong>Age:</strong>
-            <p>{{user?.age}}</p>
-          </div>
-          <div>
-            <strong>Social Media:</strong>
-            <p><button class="btn btn-sm btn-primary" (click)="editSocialMedia(user)">Add Social Media</button></p>
-          </div>
-          <div>
-            <strong>Last Active:</strong>
-            <p>{{user?.lastActive | timeago}}</p>
-          </div>
-          <div>
-            <strong>Member since:</strong>
-            <p>{{user?.created | date: 'mediumDate'}}</p>
-          </div>
-        </div>
-        <div class="card-footer">
-          <!-- kanw kolpo me to id gt to koumpi vrisketai ektos formas -->
-          <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-success btn-block">Save Changes</button>
+      <div class="col-sm-8">
+        <div *ngIf="editForm.dirty" class="alert alert-info">
+          <strong>Information:</strong>You have made changes. Any unsaved changes will be lost!
         </div>
       </div>
     </div>
-    <div class="col-sm-8">
-      <!-- tabbed panel -->
-      <div class="tab-panel">
-        <tabset class="member-tabset">
-          <tab heading="Edit Profile">
-            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
-              <h5>Description</h5>
-              <textarea name="introduction" rows="1" class="form-control" [(ngModel)]="user.introduction"></textarea>
-              <h5>Looking For</h5>
-              <textarea name="lookingFor" rows="1" class="form-control" [(ngModel)]="user.lookingFor"></textarea>
-              <h5>Interests</h5>
-              <textarea name="interests" rows="1" class="form-control" [(ngModel)]="user.interests"></textarea>
-              <h5>Teams</h5>
-              <textarea name="teams" rows="1" class="form-control"></textarea>
-              <h5>Position</h5>
-              <div class="row" style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px; margin-left: auto; margin-right: auto;">
-                <div class="col-sm-3 col-md-3 col-lg-3">
-                  <button class="btn btn-primary" style="margin-top:5px;" (click)="editPositionModal(user)" type="button">Choose Position</button>
+    <div class="row">
+      <div class="col-sm-4">
+        <!-- general info including the photo -->
+        <div class="card shadow-lg" style="background-color: #E1E3E3;">
+          <!-- <img class="card-img-top img-thumbnail" src="{{user.photoUrl}}" alt="{{user.knownAs}}"> -->
+          <img class="card-img-top img-thumbnail" src="{{photoUrl || user.photoUrl || '../../../../../assets/user.png'}}" alt="{{user.knownAs}}">
+          <div class="card-body">
+            <div class="shadow-lg">
+              <strong>Location:</strong>
+              <p>{{user.city}}, {{user?.country}}</p>
+              <hr>
+            </div>
+            <div class="shadow-lg">
+              <strong>Age:</strong>
+              <p>{{user?.age}}</p>
+              <hr>
+            </div>
+            <div class="shadow-lg">
+              <strong>Social Media:</strong>
+              <p><button class="btn btn-sm btn-primary" (click)="editSocialMedia(user)">Add Social Media</button></p>
+              <hr>
+            </div>
+            <div class="shadow-lg">
+              <strong>Last Active:</strong>
+              <p>{{user?.lastActive | timeago}}</p>
+              <hr>
+            </div>
+            <div class="shadow-lg">
+              <strong>Member since:</strong>
+              <p>{{user?.created | date: 'mediumDate'}}</p>
+              <hr>
+            </div>
+          </div>
+          <div class="card-footer shadow-lg" style="background-color: #E1E3E3;">
+            <!-- kanw kolpo me to id gt to koumpi vrisketai ektos formas -->
+            <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-success btn-block">Save Changes</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <!-- tabbed panel -->
+        <div class="tab-panel shadow-lg" style="background-color: #E3E3E3;">
+          <tabset class="member-tabset">
+            <tab heading="Edit Profile">
+              <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
+                <h5>Description</h5>
+                <textarea style="background-color: #E1E3E3;" name="introduction" rows="1" class="form-control shadow-lg" [(ngModel)]="user.introduction"></textarea>
+                <h5>Looking For</h5>
+                <textarea style="background-color: #E1E3E3;" name="lookingFor" rows="1" class="form-control shadow-lg" [(ngModel)]="user.lookingFor"></textarea>
+                <h5>Interests</h5>
+                <textarea style="background-color: #E1E3E3;" name="interests" rows="1" class="form-control shadow-lg" [(ngModel)]="user.interests"></textarea>
+                <h5>Teams</h5>
+                <textarea style="background-color: #E1E3E3;" name="teams" rows="1" class="form-control shadow-lg"></textarea>
+                <h5>Position</h5>
+                <div class="row shadow-lg" style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px; margin-left: auto; margin-right: auto;">
+                  <div class="col-sm-3 col-md-3 col-lg-3">
+                    <button class="btn btn-primary" style="margin-top:5px;" (click)="editPositionModal(user)" type="button">Choose Position</button>
+                  </div>
+                  <div class="col-sm-9 col-md-9 col-lg-9 position-wrapper" style="margin-top: 5px;">
+                    <h5><span *ngFor="let position of positionsToDisplay"
+                      class="position-badges badge"
+                     [ngClass]="{'badge-warning':position === 'Goalkeeper',
+                                 'badge-danger':position === 'Striker',
+                                 'badge-primary':position === 'Defender',
+                                 'badge-secondary':position === 'Midfielder'
+                              }">{{position}}</span></h5>
+                  </div>
                 </div>
-                <div class="col-sm-9 col-md-9 col-lg-9 position-wrapper" style="margin-top: 5px;">
-                  <h5><span *ngFor="let position of positionsToDisplay"
+                <!-- <div style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px;">
+                  <button class="btn btn-primary" (click)="editPositionModal(user)" type="button">Choose Position</button>
+                  <div class="position-wrapper">
+                    <h5><span *ngFor="let position of positionsToDisplay"
                     class="position-badges badge"
                    [ngClass]="{'badge-warning':position === 'Goalkeeper',
                                'badge-danger':position === 'Striker',
                                'badge-primary':position === 'Defender',
                                'badge-secondary':position === 'Midfielder'
                             }">{{position}}</span></h5>
-                </div>
-              </div>
-              <!-- <div style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px;">
-                <button class="btn btn-primary" (click)="editPositionModal(user)" type="button">Choose Position</button>
-                <div class="position-wrapper">
-                  <h5><span *ngFor="let position of positionsToDisplay"
-                  class="position-badges badge"
-                 [ngClass]="{'badge-warning':position === 'Goalkeeper',
-                             'badge-danger':position === 'Striker',
-                             'badge-primary':position === 'Defender',
-                             'badge-secondary':position === 'Midfielder'
-                          }">{{position}}</span></h5>
-                </div>
-              </div> -->
-              <h5>Location Details</h5>
-              <div style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px;">
-                <div class="row">
-                  <div class="col lg-4 col-md-4">
-                    <label for="city">City</label>
                   </div>
-                  <div class="col-lg-8 col-md-8">
-                    <input class="form-control" type="text" name="city" [(ngModel)]="user.city">
+                </div> -->
+                <h5>Location Details</h5>
+                <div class="shadow-lg" style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px; background-color: #E1E3E3;">
+                  <div class="row">
+                    <div class="col lg-4 col-md-4">
+                      <label for="city">City</label>
+                    </div>
+                    <div class="col-lg-8 col-md-8">
+                      <input class="form-control" type="text" name="city" [(ngModel)]="user.city">
+                    </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col lg-4 col-md-4">
-                    <label for="country">Country</label>
+                  <div class="row">
+                    <div class="col lg-4 col-md-4">
+                      <label for="country">Country</label>
+                    </div>
+                    <div class="col-lg-8 col-md-8">
+                      <input class="form-control" type="text" name="country" [(ngModel)]="user.country">
+                    </div>
                   </div>
-                  <div class="col-lg-8 col-md-8">
-                    <input class="form-control" type="text" name="country" [(ngModel)]="user.country">
+                  <div class="row">
+                    <div class="col lg-4 col-md-4">
+                      <label for="placeOfBirth">Place Of Birth</label>
+                    </div>
+                    <div class="col-lg-8 col-md-8">
+                      <input class="form-control" type="text" name="placeOfBirth" [(ngModel)]="user.placeOfBirth">
+                    </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col lg-4 col-md-4">
-                    <label for="placeOfBirth">Place Of Birth</label>
-                  </div>
-                  <div class="col-lg-8 col-md-8">
-                    <input class="form-control" type="text" name="placeOfBirth" [(ngModel)]="user.placeOfBirth">
+                  <div class="row">
+                    <div class="col lg-4 col-md-4">
+                      <label for="citizenship">Citizenship</label>
+                    </div>
+                    <div class="col-lg-8 col-md-8">
+                      <input class="form-control" type="text" name="citizenship" [(ngModel)]="user.citizenship">
+                    </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col lg-4 col-md-4">
-                    <label for="citizenship">Citizenship</label>
+                <h5>General Information</h5>
+                <div class="shadow-lg" style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px; background-color: #E1E3E3;">
+                  <div class="row">
+                    <div class="col lg-4 col-md-4">
+                      <label for="fullName">FullName</label>
+                    </div>
+                    <div class="col-lg-8 col-md-8">
+                      <input class="form-control" type="text" name="fullName" [(ngModel)]="user.fullName">
+                    </div>
                   </div>
-                  <div class="col-lg-8 col-md-8">
-                    <input class="form-control" type="text" name="citizenship" [(ngModel)]="user.citizenship">
+                  <div class="row">
+                    <div class="col lg-4 col-md-4">
+                      <label for="currentClub">Current Club</label>
+                    </div>
+                    <div class="col-lg-8 col-md-8">
+                      <input class="form-control" type="text" name="currentClub" [(ngModel)]="user.currentClub">
+                    </div>
                   </div>
-                </div>
-              </div>
-              <h5>General Information</h5>
-              <div style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px;">
-                <div class="row">
-                  <div class="col lg-4 col-md-4">
-                    <label for="fullName">FullName</label>
+                  <div class="row">
+                    <div class="col lg-4 col-md-4">
+                      <label for="height">Height</label>
+                    </div>
+                    <div class="col-lg-8 col-md-8">
+                      <input class="form-control" type="number" name="height" [(ngModel)]="user.height">
+                    </div>
                   </div>
-                  <div class="col-lg-8 col-md-8">
-                    <input class="form-control" type="text" name="fullName" [(ngModel)]="user.fullName">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col lg-4 col-md-4">
-                    <label for="currentClub">Current Club</label>
-                  </div>
-                  <div class="col-lg-8 col-md-8">
-                    <input class="form-control" type="text" name="currentClub" [(ngModel)]="user.currentClub">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col lg-4 col-md-4">
-                    <label for="height">Height</label>
-                  </div>
-                  <div class="col-lg-8 col-md-8">
-                    <input class="form-control" type="number" name="height" [(ngModel)]="user.height">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col lg-4 col-md-4">
-                    <label for="foot">Foot</label>
-                  </div>
-                  <div class="col-lg-8 col-md-8">
-                    <input class="form-control" type="text" name="foot" [(ngModel)]="user.foot">
+                  <div class="row">
+                    <div class="col lg-4 col-md-4">
+                      <label for="foot">Foot</label>
+                    </div>
+                    <div class="col-lg-8 col-md-8">
+                      <input class="form-control" type="text" name="foot" [(ngModel)]="user.foot">
+                    </div>
                   </div>
                 </div>
-              </div>
-            </form>
-          </tab>
-          <tab heading="Edit Photos">
-            <!-- we then go to .ts file and use the method -->
-            <app-photo-editor [photos]="user.photos" (getMemberPhotoChange)="updateMainPhoto($event)"></app-photo-editor>
-          </tab>
-        </tabset>
+              </form>
+            </tab>
+            <tab heading="Edit Photos">
+              <!-- we then go to .ts file and use the method -->
+              <app-photo-editor [photos]="user.photos" (getMemberPhotoChange)="updateMainPhoto($event)"></app-photo-editor>
+            </tab>
+          </tabset>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</body>

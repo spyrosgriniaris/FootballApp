@@ -1,5 +1,5 @@
 .filtersSideBar {
-    background-color: #F8F8F8;
+    background-color: #d1e0e0;
 }
 
 .slider {
@@ -136,4 +136,13 @@
 
 #custom-search-input .glyphicon-search{
     font-size: 23px;
+}
+
+.body {
+  background-color: #b9cad1;
+  /* background-color: #fff; */
+}
+
+.searchIcon {
+  cursor: pointer;
 }

@@ -118,6 +118,16 @@
                 <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword').hasError('required') && registerForm.get('confirmPassword').touched">Password is required</div>
                 <div class="invalid-feedback" *ngIf="registerForm.hasError('mismatch') && registerForm.get('confirmPassword').touched">Passwords must match</div>
               </div>
+
+              <div class="form-group">
+                <label class="control-label" style="margin-right:10px">I am a: </label>
+                <label class="radio-inline">
+                  <input class="mr-3" type="radio" value="male" formControlName="gender">Male
+                </label>
+                <label class="radio-inline ml-3">
+                  <input class="mr-3" type="radio" value="female" formControlName="gender">Female
+                </label>
+              </div>
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
               <button class="btn btn-lg btn-google btn-block text-uppercase" (click)="cancel()" type="button">Cancel</button>
               <hr class="my-4">
