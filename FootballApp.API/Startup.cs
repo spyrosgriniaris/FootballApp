@@ -77,6 +77,7 @@ namespace FootballApp.API
             // add scoped makes an instance for every request
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IMemberRepository, MemberRepository>();
+            services.AddScoped<ITeamRepository, TeamRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters

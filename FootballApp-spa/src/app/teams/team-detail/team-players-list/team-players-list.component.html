@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-success" (click)="onNewRosterPlayer()">New Player</button>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="container">
+      <app-team-players-item
+      *ngFor="let rosterPlayerel of rosterPlayersInit; let i = index;"
+      [rosterPlayer]="rosterPlayerel"
+      [index]="i">
+      </app-team-players-item>
+    </div>
+    
+  </div>
+  
+</div>
+
+<div class="d-flex justify-content-center row mt-3">
+  <pagination
+   [boundaryLinks]="true" 
+   [totalItems]="pagination.totalItems" 
+   [(ngModel)]="pagination.currentPage" 
+   [itemsPerPage]="pagination.itemsPerPage"
+   (pageChanged)="pageChanged($event)"
+      previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+
+</pagination>
+</div>
+<hr>

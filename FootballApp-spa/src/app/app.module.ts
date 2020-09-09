@@ -44,6 +44,15 @@ import { PhotoEditorComponent } from './players/photo-editor/photo-editor.compon
 import { PositionsModalComponent } from './players/positions-modal/positions-modal.component';
 import { IsLoggedInDirective } from './_directives/isLoggedIn.directive';
 import { SocialMediaModalComponent } from './players/social-media-modal/social-media-modal.component';
+import { TeamDetailComponent } from './teams/team-detail/team-detail.component';
+import { TeamPlayerDetailComponent } from './teams/team-detail/team-player-detail/team-player-detail.component';
+import { TeamsStartComponent } from './teams/team-detail/teams-start/teams-start.component';
+import { TeamPlayersListComponent } from './teams/team-detail/team-players-list/team-players-list.component';
+import { TeamPlayersItemComponent } from './teams/team-detail/team-players-list/team-players-item/team-players-item.component';
+import { TeamPlayersEditComponent } from './teams/team-detail/team-players-edit/team-players-edit.component';
+import { TeamEditComponent } from './teams/team-edit/team-edit.component';
+import { IsTeamDirective } from './_directives/isTeam.directive';
+import { IsPlayerDirective } from './_directives/isPlayer.directive';
 
 
 
@@ -74,7 +83,16 @@ export function tokenGetter() {
       PhotoEditorComponent,
       LikesComponent,
       PositionsModalComponent,
-      SocialMediaModalComponent
+      SocialMediaModalComponent,
+      TeamDetailComponent,
+      TeamPlayerDetailComponent,
+      TeamsStartComponent,
+      TeamPlayersListComponent,
+      TeamPlayersItemComponent,
+      TeamPlayersEditComponent,
+      TeamEditComponent,
+      IsTeamDirective,
+      IsPlayerDirective
    ],
    imports: [
       BrowserModule,

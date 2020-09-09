@@ -60,6 +60,22 @@ namespace FootballApp.API.Controllers
 
             var usersToReturn = _mapper.Map<IEnumerable<MemberForListDto>>(users);
 
+            // find out if user is a team or a player
+
+            foreach (var user in usersToReturn) {
+                // Resolve the user via their email
+                var userFromRepo = await _userManager.FindByIdAsync(user.Id.ToString());
+                // Get the roles for the user
+                var roles = await _userManager.GetRolesAsync(userFromRepo);
+
+                if (roles.Contains("Team")) {
+                    user.Role = "Team";
+                }
+                else {
+                    user.Role = "Player";
+                }
+            }
+
             Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
 
             return Ok(usersToReturn);

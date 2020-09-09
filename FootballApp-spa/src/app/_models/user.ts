@@ -28,4 +28,5 @@ export interface User {
     facebookUrl?: string;
     instagramUrl: string;
     twitterUrl?: string;
+    role?: string;
 }

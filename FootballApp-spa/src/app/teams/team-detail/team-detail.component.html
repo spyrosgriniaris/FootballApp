@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html>
+ <head>
+ </head>
+  <body>
+    <div class="container-fluid ml-2">
+      <div class="row">
+        <div class="col-sm-3 col-md-3 col-lg-3">
+          <h2 class="mt-3">{{user.knownAs}}'s Profile</h2>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3"></div>
+        
+      </div>
+      <div class="row">
+        <div class="col-sm-3 col-md-3 col-lg-3">
+          <!-- general info including the photo -->
+        <div class="card shadow-lg" style="background-color: #E1E3E3;">
+          <img class="card-img-top img-thumbnail shadow-lg" src="{{user.photoUrl || '../../../../../assets/user.png'}}" alt="{{user.knownAs}}">
+          <div class="card-body">
+            <div class="shadow-lg">
+              <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <strong>Location:</strong>
+                  <p>{{user.city}}, {{user?.country}}</p>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6" style="left: 0;">
+                  <ul>
+                    <li *ngIf="user.facebookUrl">
+                      <a href="{{user?.facebookUrl}}"><i class="fa fa-facebook-f icon"></i></a>
+                    </li>
+                    <li *ngIf="user.instagramUrl">
+                      <a href="{{user?.instagramUrl}}"><i class="fa fa-instagram icon"></i></a>
+                    </li>
+                    <li *ngIf="user.twitterUrl">
+                      <a href="{{user?.twitterUrl}}"><i class="fa fa-twitter icon"></i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <hr>
+            </div>
+          </div>
+          <div class="card-footer shadow-lg" style="background-color: #E1E3E3;">
+            <div class="btn-group d-flex">
+              <button class="btn btn-primary w-100">Like</button>
+              <button class="btn btn-success w-100" (click)="selectTab(3)">Message</button>
+              <!-- ta tab exoun id 0,1,2,3.. -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-5 col-md-5 col-lg-5">
+        <!-- tabbed panel -->
+        <div class="tab-panel shadow-lg"  style="background-color: #E1E3E3;">
+          <tabset  style="background-color: #E1E3E3;" class="member-tabset" #memberTabs> 
+            <!-- to reference einai gia ta minimata -->
+            <tab style="background-color: #E1E3E3;" heading="About {{user?.knownAs}}">
+              <h5>General Information</h5>
+                <div style="border: 1px solid gainsboro; padding: 3px;" class="shadow-lg">
+                  <div class="row">
+                    <div class="col lg-5 col-md-5">
+                      <label for="fullName">FullName: </label>
+                    </div>
+                    <div class="col-lg-7 col-md-7">
+                      <label *ngIf="!user.fullName" for="fullNameText"> - </label>
+                      <label for="fullNameText">{{user.fullName}}</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col lg-5 col-md-5">
+                      <label for="knownAs">Known As: </label>
+                    </div>
+                    <div class="col-lg-7 col-md-7">
+                      <label *ngIf="!user.knownAs" for="knownAsText"> - </label>
+                      <label for="knownAsText">{{user.knownAs}}</label>
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col lg-5 col-md-5">
+                      <label for="age">Age: </label>
+                    </div>
+                    <div class="col-lg-7 col-md-7">
+                      <label *ngIf="!user.age" for="ageText"> - </label>
+                      <label for="ageText">{{user.age}}</label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col lg-5 col-md-5">
+                      <label for="eps">EPS: </label>
+                    </div>
+                    <div class="col-lg-7 col-md-7">
+                      <label *ngIf="!user.knownAs" for="epsText"> - </label>
+                      <label for="epsText">EPS EBOIAS</label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col lg-5 col-md-5">
+                      <label for="city">City: </label>
+                    </div>
+                    <div class="col-lg-7 col-md-7">
+                      <label *ngIf="!user.city" for="cityText"> - </label>
+                      <label for="cityText">{{user.city}}</label>
+                    </div>
+                  </div>
+
+                </div>
+  
+              <h5 *ngIf="user.introduction" class="mt-3">Description</h5>
+              <div *ngIf="user.introduction" class="mt-3 shadow-lg" style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px;">
+                <p>{{user.introduction}}</p>
+              </div>
+              <h5 *ngIf="user.lookingFor" mt-3>Looking For</h5>
+              <div *ngIf="user.lookingFor" class="shadow-lg" style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px;">
+                <p>{{user.lookingFor}}</p>
+              </div>
+              <h5 *ngIf="user.interests" mt-3>Interests</h5>
+              <div *ngIf="user.interests" class="shadow-lg" style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px;">
+                <p>{{user.interests}}</p>
+              </div>
+            </tab>
+            <tab heading="Photos">
+              <ngx-gallery style="display: inline-block; margin-bottom: 20px;" [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+            </tab>
+            <tab heading="Players">
+              <div class="container">
+                <app-team-players-list
+                [rosterPlayersInit] = "rosterPlayers"
+                [pagination] = "rosterPlayersPagination">
+                </app-team-players-list>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+      <div class="col-sm-3 col-md-3 col-lg-3">
+        <router-outlet></router-outlet>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

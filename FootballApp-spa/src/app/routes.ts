@@ -14,6 +14,13 @@ import { PlayerEditResolver } from './_resolvers/player-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { LikesResolver } from './_resolvers/likes.resolver';
 import { RankResolver } from './_resolvers/rank.resolver';
+import { TeamDetailComponent } from './teams/team-detail/team-detail.component';
+import { TeamsStartComponent } from './teams/team-detail/teams-start/teams-start.component';
+import { TeamPlayersEditComponent } from './teams/team-detail/team-players-edit/team-players-edit.component';
+import { TeamPlayerDetailComponent } from './teams/team-detail/team-player-detail/team-player-detail.component';
+import { TeamRosterPlayersListResolver } from './_resolvers/team-rosterPlayers-list.resolver';
+import { TeamEditComponent } from './teams/team-edit/team-edit.component';
+import { TeamEditResolver } from './_resolvers/team-edit.resolver';
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -26,6 +33,15 @@ export const appRoutes: Routes = [
         children: [
             {path: 'players', component: PlayersListComponent, canActivate: [AuthGuard], resolve: {users: PlayerListResolver}},
             {path: 'players/:id', component: PlayerDetailComponent, resolve: {user: PlayerDetailResolver}},
+            {path: 'teams/edit', component: TeamEditComponent, resolve: {team: TeamEditResolver} },
+            {path: 'teams/:id', component: TeamDetailComponent, resolve: {team: PlayerDetailResolver,
+                 rosterPlayers: TeamRosterPlayersListResolver},
+                children: [
+                    { path: '', component: TeamsStartComponent },
+                    { path: 'rosterPlayers/new', component: TeamPlayersEditComponent },
+                    { path: 'rosterPlayers/:playersId', component: TeamPlayerDetailComponent },
+                    { path: 'rosterPlayers/:playersId/edit', component: TeamPlayersEditComponent }
+                ]},
             {path: 'member/edit', component: PlayerEditComponent, resolve: {user: PlayerEditResolver},
              canDeactivate: [PreventUnsavedChanges]},
             {path: 'rank', component: RankComponent, canActivate: [AuthGuard], resolve: {users: RankResolver}},

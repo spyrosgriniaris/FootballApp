@@ -17,6 +17,7 @@ namespace FootballApp.API.Data
          public DbSet<Like> Likes { get; set; }
          public DbSet<PlayerPosition> Positions { get; set; }
         //  public DbSet<User> Users {get; set;}
+        public DbSet<RosterPlayers> RosterPlayers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
@@ -54,6 +55,11 @@ namespace FootballApp.API.Data
             builder.Entity<PlayerPosition>()
             .HasOne(u => u.User)
             .WithMany(p => p.Positions)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<RosterPlayers>()
+            .HasOne(u => u.User)
+            .WithMany(r => r.RosterPlayers)
             .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Photo>().HasQueryFilter(p => p.isApproved);

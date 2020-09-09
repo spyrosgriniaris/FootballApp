@@ -39,5 +39,7 @@ namespace FootballApp.API.Models
         // Likes Functionality
         public ICollection<Like> Likers { get; set; }
         public ICollection<Like> Likees { get; set; }
+        // roster players for Teams
+        public ICollection<RosterPlayers> RosterPlayers { get; set; }
     }
 }

@@ -71,6 +71,15 @@ namespace FootballApp.API.Controllers
 
             var user = _mapper.Map<MemberForListDto>(userFromDb);
 
+            var roles = await _userManager.GetRolesAsync(userFromDb);
+
+            if(roles.Contains("Team"))
+                user.Role = "Team";
+            else if(roles.Contains("Player"))
+                user.Role = "Player";
+            else if(roles.Contains("Admin"))
+                user.Role = "Admin";
+
             if (result.Succeeded)
             {
                 return Ok(new

@@ -21,5 +21,7 @@ namespace FootballApp.API.Dtos
         public string Citizenship { get; set; }
         public string Foot { get; set; }
         public string CurrentClub { get; set; }
+        // stands for role, in order user to be redirected either in players component or in teams component
+        public string Role { get; set; }
     }
 }

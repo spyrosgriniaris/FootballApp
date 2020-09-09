@@ -32,6 +32,10 @@ namespace FootballApp.API.Helpers
             CreateMap<PlayerPosition, PositionNameReceiveDto>();
 
             CreateMap<PlayerPosition, PositionForDetailDto>();
+
+            CreateMap<RosterPlayerForUpdateDto, RosterPlayers>();
+
+            CreateMap<RosterPlayers, RosterPlayerForUpdateDto>();
        }
     }
 }
