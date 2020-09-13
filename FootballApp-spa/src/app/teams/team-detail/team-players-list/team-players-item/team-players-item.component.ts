@@ -14,6 +14,7 @@ export class TeamPlayersItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }

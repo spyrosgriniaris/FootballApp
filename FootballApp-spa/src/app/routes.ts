@@ -21,6 +21,8 @@ import { TeamPlayerDetailComponent } from './teams/team-detail/team-player-detai
 import { TeamRosterPlayersListResolver } from './_resolvers/team-rosterPlayers-list.resolver';
 import { TeamEditComponent } from './teams/team-edit/team-edit.component';
 import { TeamEditResolver } from './_resolvers/team-edit.resolver';
+import { TeamEditRosterPlayersListResolver } from './_resolvers/team-edit-rosterPlayers-list.resolver';
+import { TeamDetailResolver } from './_resolvers/team-detail.resolver';
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -33,14 +35,21 @@ export const appRoutes: Routes = [
         children: [
             {path: 'players', component: PlayersListComponent, canActivate: [AuthGuard], resolve: {users: PlayerListResolver}},
             {path: 'players/:id', component: PlayerDetailComponent, resolve: {user: PlayerDetailResolver}},
-            {path: 'teams/edit', component: TeamEditComponent, resolve: {team: TeamEditResolver} },
-            {path: 'teams/:id', component: TeamDetailComponent, resolve: {team: PlayerDetailResolver,
+            {path: 'teams/edit', component: TeamEditComponent, canDeactivate: [PreventUnsavedChanges], resolve: {team: TeamEditResolver,
+                 rosterPlayers: TeamEditRosterPlayersListResolver},
+                children: [
+                    {path: '', component: TeamsStartComponent},
+                    { path: 'rosterPlayers', component: TeamsStartComponent },
+                    { path: 'rosterPlayers/new', component: TeamPlayersEditComponent },
+                    {path: 'rosterPlayers/:playersId', component: TeamPlayerDetailComponent}
+                ] },
+            {path: 'teams/:id', component: TeamDetailComponent, resolve: {team: TeamDetailResolver,
                  rosterPlayers: TeamRosterPlayersListResolver},
                 children: [
                     { path: '', component: TeamsStartComponent },
-                    { path: 'rosterPlayers/new', component: TeamPlayersEditComponent },
+                    // { path: 'rosterPlayers/new', component: TeamPlayersEditComponent },
                     { path: 'rosterPlayers/:playersId', component: TeamPlayerDetailComponent },
-                    { path: 'rosterPlayers/:playersId/edit', component: TeamPlayersEditComponent }
+                    // { path: 'rosterPlayers/:playersId/edit', component: TeamPlayersEditComponent }
                 ]},
             {path: 'member/edit', component: PlayerEditComponent, resolve: {user: PlayerEditResolver},
              canDeactivate: [PreventUnsavedChanges]},

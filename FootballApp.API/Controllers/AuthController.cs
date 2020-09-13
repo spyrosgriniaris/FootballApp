@@ -48,7 +48,7 @@ namespace FootballApp.API.Controllers
 
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(userToCreate, "Member");
+                await _userManager.AddToRoleAsync(userToCreate, userForRegisterDto.Property);
                 return CreatedAtRoute("GetUser", new {controller = "Members", id = userToCreate.Id}, _mapper.Map<MemberForDetailedDto>(userToCreate));
                 // return StatusCode(201);
             }

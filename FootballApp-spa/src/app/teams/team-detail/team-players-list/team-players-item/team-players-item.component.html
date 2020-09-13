@@ -1,11 +1,11 @@
 <!-- einai se parenthesi giati einai dinamiko to routerLink -->
 <div class="list-group">
   <a
-    [routerLink]="['rosterPlayers/', index]"
+    [routerLink]="['rosterPlayers/', rosterPlayer.id]"
     routerLinkActive="active"
     style="cursor: pointer;"
     class="list-group-item list-group-item-action">
-          <h4 class="list-group-item-heading">{{ rosterPlayer.fullName }}</h4>
+          <h6 class="list-group-item-heading">{{ rosterPlayer.fullName }}</h6>
           <p class="list-group-item-text">{{ rosterPlayer.position }}</p>
 </a>
 </div>

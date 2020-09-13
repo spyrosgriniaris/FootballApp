@@ -49,6 +49,9 @@ export class MemberService {
       if (userParams.striker) {
         params = params.append('striker', 'true');
       }
+      if (userParams.teams) {
+        params = params.append('teams', 'true');
+      }
     }
 
     // likes functionality

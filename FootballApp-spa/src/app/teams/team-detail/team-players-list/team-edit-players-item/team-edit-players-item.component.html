@@ -1,0 +1,19 @@
+<!-- einai se parenthesi giati einai dinamiko to routerLink -->
+<div class="list-group">
+  <a
+    [routerLink]="['rosterPlayers/', rosterPlayer.id]"
+    routerLinkActive="active"
+    style="cursor: pointer;"
+    class="list-group-item list-group-item-action">
+          <div class="row">
+            <div class="col-sm-8">
+              <h6 class="list-group-item-heading">{{ rosterPlayer.fullName }}</h6>
+              <p class="list-group-item-text">{{ rosterPlayer.position }}</p>
+            </div>
+            <div class="col-sm-4">
+              <button class="btn btn-danger" (click)="deleteRosterPlayer()" title="Delete" data-toggle="tooltip">
+                <i class="fa fa-trash" aria-hidden="true"></i></button>
+            </div>
+          </div>
+</a>
+</div>

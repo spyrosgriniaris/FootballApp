@@ -98,6 +98,7 @@ export class PlayersListComponent implements OnInit {
     this.userParams.defender = false;
     this.userParams.midfielder = false;
     this.userParams.striker = false;
+    this.userParams.teams = false;
     this.userParams.city = '';
     // end of additional filtering area
   }
@@ -121,13 +122,6 @@ export class PlayersListComponent implements OnInit {
     this.pagination.currentPage = event.page;
     this.loadUsers();
   }
-
-  // resetFilters() {
-  //   this.userParams.gender = this.user.gender === 'female' ? 'female' : 'male';
-  //   this.userParams.minAge = 18;
-  //   this.userParams.maxAge = 45;
-  //   this.loadUsers();
-  // }
 
   searchUsers() {
     if (!this.userParams.searchWord) {

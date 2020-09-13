@@ -1,3 +1,24 @@
-<p>
-  team-players-edit works!
-</p>
+<div class="container" style="background-color: #d1e0e0;">
+  <h2>Add a player</h2>
+  <form #rosterForm="ngForm" id="rosterForm" (ngSubmit)="addRosterPlayer()">
+    <div class="form-group">
+      <label for="fullName">FullName</label>
+      <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter FullName" [(ngModel)]="fullName" required>
+    </div>
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input type="number" class="form-control" id="age" name="age" placeholder="Enter Age" [(ngModel)]="age" required>
+    </div>
+    <div class="form-group">
+      <label for="position">Position</label>
+      <input type="text" class="form-control" id="position" name="position" placeholder="Enter Position" [(ngModel)]="position" required>
+    </div>
+    <div class="form-group">
+      <label for="foot">Foot</label>
+      <input type="text" class="form-control" id="foot" name="foot" placeholder="Enter Foot" [(ngModel)]="foot" required>
+    </div>
+    <div class="form-group">
+      <button [disabled]="!rosterForm.valid" class="btn btn-primary" type="submit">Add</button>
+    </div>
+  </form>
+</div>

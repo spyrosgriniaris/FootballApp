@@ -33,6 +33,7 @@ namespace FootballApp.API.Helpers
         public bool Defender { get; set; } = false;
         public bool Midfielder { get; set; } = false;
         public bool Striker { get; set; } = false;
+        public bool Teams { get; set; } = false;
         // end of position filtering
         public string City { get; set; }
     }

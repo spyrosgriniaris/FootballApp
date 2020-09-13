@@ -53,6 +53,8 @@ import { TeamPlayersEditComponent } from './teams/team-detail/team-players-edit/
 import { TeamEditComponent } from './teams/team-edit/team-edit.component';
 import { IsTeamDirective } from './_directives/isTeam.directive';
 import { IsPlayerDirective } from './_directives/isPlayer.directive';
+import { TeamEditRosterPlayersListResolver } from './_resolvers/team-edit-rosterPlayers-list.resolver';
+import { TeamEditPlayersItemComponent } from './teams/team-detail/team-players-list/team-edit-players-item/team-edit-players-item.component';
 
 
 
@@ -92,7 +94,8 @@ export function tokenGetter() {
       TeamPlayersEditComponent,
       TeamEditComponent,
       IsTeamDirective,
-      IsPlayerDirective
+      IsPlayerDirective,
+      TeamEditPlayersItemComponent
    ],
    imports: [
       BrowserModule,

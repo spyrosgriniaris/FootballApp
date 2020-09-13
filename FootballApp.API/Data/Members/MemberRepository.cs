@@ -86,6 +86,15 @@ namespace FootballApp.API.Data.Members
                 else
                     users = strikers;
             }
+            if(userParams.Teams) {
+                var usersWithTeams = _userManager.Users.Include(p=>p.Photos).Include(pos=>pos.Positions).AsQueryable();
+                var tms = _context.UserRoles.Where(r=>r.RoleId == 5).Select(p=>p.UserId);
+                var teams = usersWithTeams.Where(u=> tms.Contains(u.Id));
+                if(userParams.Goalkeeper || userParams.Defender || userParams.Midfielder || userParams.Striker)
+                    users = users.Concat(teams);
+                else
+                    users = teams;
+            }
             
 
             // end of position filtering

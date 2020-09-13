@@ -1,11 +1,18 @@
 <div class="container">
-  <div class="row">
+  <div *ngIf="isCurrentTeam" class="row">
     <div class="col-xs-12">
       <button class="btn btn-success" (click)="onNewRosterPlayer()">New Player</button>
     </div>
   </div>
   <div class="row mt-3">
-    <div class="container">
+    <div *ngIf="isCurrentTeam" class="container">
+      <app-team-edit-players-item
+      *ngFor="let rosterPlayerel of rosterPlayersInit; let i = index;"
+      [rosterPlayer]="rosterPlayerel"
+      [index]="i">
+      </app-team-edit-players-item>
+    </div>
+    <div *ngIf="!isCurrentTeam" class="container">
       <app-team-players-item
       *ngFor="let rosterPlayerel of rosterPlayersInit; let i = index;"
       [rosterPlayer]="rosterPlayerel"

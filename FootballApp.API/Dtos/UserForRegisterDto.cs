@@ -25,6 +25,8 @@ namespace FootballApp.API.Dtos
         public string Country { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastActive { get; set; }
+        [Required]
+        public string Property { get; set; }
 
         public UserForRegisterDto()
         {

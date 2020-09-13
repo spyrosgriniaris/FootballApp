@@ -8,7 +8,7 @@
 
 <!-- Sidebar -->
 <body class="body container-fluid">
-  <div class="row" style="height: 95%;">
+  <div class="row" style="height: 95%; padding-top: 15px; padding-bottom: 15px;">
     <div class="col-lg-2 col-xl-2 filtersSideBar">
       <!-- Section: Condition -->
     <section filter="position" class="mt-3">
@@ -30,6 +30,10 @@
           </label>
           <label class="container">Striker
             <input type="checkbox" id="striker" name="striker" [(ngModel)]="userParams.striker" value="striker" (ngModelChange)="loadUsers()">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Teams
+            <input type="checkbox" id="teams" name="teams" [(ngModel)]="userParams.teams" value="teams" (ngModelChange)="loadUsers()">
             <span class="checkmark"></span>
           </label>
           <hr>

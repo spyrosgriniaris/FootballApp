@@ -1,3 +1,114 @@
-<p>
-  team-edit works!
-</p>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <h1 class="mt-4">Your Profile</h1>
+      </div>
+      <div class="col-sm-8">
+        <div *ngIf="editForm.dirty" class="alert alert-info">
+          <strong>Information:</strong>You have made changes. Any unsaved changes will be lost!
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <!-- general info including the photo -->
+        <div class="card shadow-lg" style="background-color: #E1E3E3;">
+          <!-- <img class="card-img-top img-thumbnail" src="{{user.photoUrl}}" alt="{{user.knownAs}}"> -->
+          <img class="card-img-top img-thumbnail" src="{{photoUrl || team.photoUrl || '../../../../../assets/user.png'}}" alt="{{team.knownAs}}">
+          <div class="card-body">
+            <div class="shadow-lg">
+              <strong>Location:</strong>
+              <p>{{team.city}}, {{team?.country}}</p>
+              <hr>
+            </div>
+            <div class="shadow-lg">
+              <strong>Age:</strong>
+              <p>{{team?.age}}</p>
+              <hr>
+            </div>
+            <div class="shadow-lg">
+              <strong>Social Media:</strong>
+              <p><button class="btn btn-sm btn-primary" (click)="editSocialMedia(team)">Add Social Media</button></p>
+              <hr>
+            </div>
+            <div class="shadow-lg">
+              <strong>Last Active:</strong>
+              <p>{{team?.lastActive | timeago}}</p>
+              <hr>
+            </div>
+            <div class="shadow-lg">
+              <strong>Member since:</strong>
+              <p>{{team?.created | date: 'mediumDate'}}</p>
+              <hr>
+            </div>
+          </div>
+          <div class="card-footer shadow-lg" style="background-color: #E1E3E3;">
+            <!-- kanw kolpo me to id gt to koumpi vrisketai ektos formas -->
+            <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-success btn-block">Save Changes</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <!-- tabbed panel -->
+        <div class="tab-panel shadow-lg" style="background-color: #E3E3E3;">
+          <tabset class="member-tabset">
+            <tab heading="Edit Profile">
+              <form #editForm="ngForm" id="editForm" (ngSubmit)="updateTeam()">
+                <h5>Description</h5>
+                <textarea style="background-color: #E1E3E3;" name="introduction" rows="1" class="form-control shadow-lg" [(ngModel)]="team.introduction"></textarea>
+                <h5>Looking For</h5>
+                <textarea style="background-color: #E1E3E3;" name="lookingFor" rows="1" class="form-control shadow-lg" [(ngModel)]="team.lookingFor"></textarea>
+                <h5>Location Details</h5>
+                <div class="shadow-lg" style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px; background-color: #E1E3E3;">
+                  <div class="row">
+                    <div class="col lg-4 col-md-4">
+                      <label for="city">City</label>
+                    </div>
+                    <div class="col-lg-8 col-md-8">
+                      <input class="form-control" type="text" name="city" [(ngModel)]="team.city">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col lg-4 col-md-4">
+                      <label for="country">Country</label>
+                    </div>
+                    <div class="col-lg-8 col-md-8">
+                      <input class="form-control" type="text" name="country" [(ngModel)]="team.country">
+                    </div>
+                  </div>
+                </div>
+                <h5>General Information</h5>
+                <div class="shadow-lg" style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px; background-color: #E1E3E3;">
+                  <div class="row">
+                    <div class="col lg-4 col-md-4">
+                      <label for="fullName">FullName</label>
+                    </div>
+                    <div class="col-lg-8 col-md-8">
+                      <input class="form-control" type="text" name="fullName" [(ngModel)]="team.fullName">
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </tab>
+            <tab heading="Edit Photos">
+              <!-- we then go to .ts file and use the method -->
+              <app-photo-editor [photos]="team.photos" (getMemberPhotoChange)="updateMainPhoto($event)"></app-photo-editor>
+            </tab>
+            <tab heading="Players">
+              <div class="container">
+                <app-team-players-list
+                [rosterPlayersInit] = "rosterPlayers"
+                [pagination] = "rosterPlayersPagination">
+                </app-team-players-list>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</body>

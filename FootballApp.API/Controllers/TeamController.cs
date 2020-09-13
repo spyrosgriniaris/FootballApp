@@ -62,9 +62,21 @@ namespace FootballApp.API.Controllers
         }
 
         [HttpGet("{rosterPlayerId}/getRosterPlayer")]
-        public async Task<IActionResult> GetRosterPlayer(int id) {
+        public async Task<IActionResult> GetRosterPlayer(int rosterPlayerId) {
+            var rosterPlayer = await _teamRepo.GetRosterPlayer(rosterPlayerId);
+            var rosterPlayerToReturn = _mapper.Map<RosterPlayerForUpdateDto>(rosterPlayer);
+            return Ok(rosterPlayerToReturn);
+        }
+
+        [HttpDelete("{id}/deleteRosterPlayer")]
+        public async Task<IActionResult> DeleteRosterPlayer(int id) {
             var rosterPlayer = await _teamRepo.GetRosterPlayer(id);
-            return Ok(rosterPlayer);
+
+            _teamRepo.Delete(rosterPlayer);
+
+            if (await _teamRepo.SaveAll())
+                return Ok("deleted");
+            return BadRequest("notdeleted");
         }
 
         
