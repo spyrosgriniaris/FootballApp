@@ -70,7 +70,8 @@ namespace FootballApp.API
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
-            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            // services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddCors();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper(typeof(MemberRepository).Assembly);
@@ -96,34 +97,43 @@ namespace FootballApp.API
         {
             if (env.IsDevelopment())  
             {
-                app.UseDeveloperExceptionPage();
+                // app.UseDeveloperExceptionPage();
             }
             else {
-                app.UseExceptionHandler(builder => {
-                    builder.Run(async context => {
-                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                // app.UseExceptionHandler(builder => {
+                //     builder.Run(async context => {
+                //         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-                        var error = context.Features.Get<IExceptionHandlerFeature>();
-                        if(error != null){
-                            context.Response.AddApplicationError(error.Error.Message);
-                            await context.Response.WriteAsync(error.Error.Message);
-                        }
+                //         var error = context.Features.Get<IExceptionHandlerFeature>();
+                //         if(error != null){
+                //             context.Response.AddApplicationError(error.Error.Message);
+                //             await context.Response.WriteAsync(error.Error.Message);
+                //         }
 
-                    });
-                });
+                //     });
+                // });
+                // app.UseHsts();
+                
                 app.UseHsts();
             }
-
-            //app.UseHttpsRedirection();
-
+            app.UseDeveloperExceptionPage();
+            // app.UseHttpsRedirection();// enable sto publish
+// ---------------------------------------------------------------------------
             app.UseRouting();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            
             app.UseAuthentication();
             app.UseAuthorization();
+            
+
+            // for publish
+            app.UseDefaultFiles(); // psaxnei tin index.html
+            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                // endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
        
