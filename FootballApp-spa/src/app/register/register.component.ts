@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
       country: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
       confirmPassword: ['', Validators.required],
-      property: ['player']
+      property: ['Player']
     }, {validator: this.passwordMatchValidator});
   }
 

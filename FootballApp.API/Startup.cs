@@ -33,6 +33,47 @@ namespace FootballApp.API
 
         public IConfiguration Configuration { get; }
 
+        
+    private async Task CreateUserRoles(IServiceProvider serviceProvider)
+    {
+        var RoleManager = serviceProvider.GetRequiredService<RoleManager<Role>>();
+        
+        IdentityResult roleResult;
+        //Adding Admin Role
+        var adminCheck = await RoleManager.RoleExistsAsync("Admin");
+        var playerCheck = await RoleManager.RoleExistsAsync("Player");
+        var teamCheck = await RoleManager.RoleExistsAsync("Team");
+        var coachCheck = await RoleManager.RoleExistsAsync("Coach");
+        if (!adminCheck)
+        {
+            //create the roles and seed them to the database
+            var role = new Role();
+            role.Name = "Admin";
+            roleResult = await RoleManager.CreateAsync(role);
+        }
+        if (!playerCheck)
+        {
+            var role = new Role();
+            role.Name = "Player";
+            roleResult = await RoleManager.CreateAsync(role);
+        }
+        if (!teamCheck)
+        {
+            var role = new Role();
+            role.Name = "Team";
+            roleResult = await RoleManager.CreateAsync(role);
+        }
+        if (!coachCheck)
+        {
+            var role = new Role();
+            role.Name = "Coach";
+            roleResult = await RoleManager.CreateAsync(role);
+        }
+            //Assign Admin role to the main User here we have given our newly registered 
+            //login id for Admin management
+    }
+
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -135,6 +176,8 @@ namespace FootballApp.API
                 endpoints.MapControllers();
                 // endpoints.MapFallbackToController("Index", "Fallback");
             });
+
+            CreateUserRoles(services).Wait();
         }
        
     }

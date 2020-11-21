@@ -22,5 +22,6 @@ namespace FootballApp.API
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
     }
 }

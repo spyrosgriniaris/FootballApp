@@ -1,47 +1,3 @@
-<!-- <div class="container mt-5">
-  <div *ngIf="!registerMode" style="text-align: center;">
-    <h1>Find your match</h1>
-    <p class="lead">Come on in to view your matches... All you need to do is sign up!</p>
-    <div class="text-center">
-      <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">Register</button>
-      <button class="btn btn-info btn-lg">Learn more</button>
-    </div>
-  </div>
-
-  <div *ngIf="registerMode" class="container">
-    <div class="row justify-content-center">
-      <div class="col-4">
-        <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
-      </div>
-    </div>
-  </div>
-</div> -->
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Landing Page - Start Bootstrap Theme</title>
-
-  <!-- Bootstrap core CSS
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom fonts for this template -->
-  <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css"> --> -->
-  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
-  <!-- Custom styles for this template -->
-  <!-- <link href="css/landing-page.min.css" rel="stylesheet"> -->
-
-</head>
-
-<body>
   <!-- Regiser form -->
   <div *ngIf="registerMode" class="container-fluid">
     <div class="row justify-content-center">
@@ -50,105 +6,246 @@
       </div>
     </div>
   </div>
+  <div *ngIf="!registerMode">
+    <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
 
-
-  <!-- Masthead -->
-  <header *ngIf="!registerMode" class="masthead text-white text-center">
-    <div class="overlay"></div>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xl-9 mx-auto">
-          <h1 class="mb-5">Be the next player a team is looking for and play in a higher level!</h1>
-        </div>
-        <div class="col-md-4 col-lg-4 col-xl-4 mx-auto">
-          <button type="button" class="btn btn-block btn-lg btn-primary" (click)="registerToggle()">Sign up!</button>
-        </div>
-      </div>
+    <div class="container d-flex flex-column align-items-center justify-content-center" data-aos="fade-up">
+      <h1>Introduce yourself</h1>
+      <h2>If you don't have an account yet, Sign up now!</h2>
+      <button type="button" class="col-4 mt-3 btn btn-md btn-primary" (click)="registerToggle()">Sign up!</button>
+      <img src="assets/img/footballer-hero.png" class="img-fluid hero-img" alt="" data-aos="zoom-in" data-aos-delay="150">
     </div>
-  </header>
 
-  <!-- Icons Grid -->
-  <section *ngIf="!registerMode" class="features-icons bg-light text-center">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-            <div class="features-icons-icon d-flex">
-              <i class="icon-layers m-auto text-primary fa fa-futbol-o"></i>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
+
+        <div class="row no-gutters">
+          <div class="content col-xl-5 d-flex align-items-stretch" data-aos="fade-right">
+            <div class="content">
+              <h3>Find the player</h3>
+              <p>
+                In our platform, every amateur player can introduce him/herself to the croud and have a chance to move to a bigger category.
+              </p>
+              <a href="#" class="about-btn">About us <i class="bx bx-chevron-right"></i></a>
             </div>
-            <h3>Amateur Football</h3>
-            <p class="lead mb-0">We try to help amateur football players make themselves known!</p>
+          </div>
+          <div class="col-xl-7 d-flex align-items-stretch" data-aos="fade-left">
+            <div class="icon-boxes d-flex flex-column justify-content-center">
+              <div class="row">
+                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
+                  <i class="bx bx-football"></i>
+                  <h4>Provide your skills</h4>
+                  <p>Fill all your information in your profile, to get to know you better</p>
+                </div>
+                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
+                  <i class="bx bx-images"></i>
+                  <h4>Build your photo gallery</h4>
+                  <p>Provide a gallery of your best moments, to impress the audience</p>
+                </div>
+                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
+                  <i class="bx bxs-user"></i>
+                  <h4>Teams are welcome</h4>
+                  <p>As a team you can place your roster players, along with a photo gallery</p>
+                </div>
+                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
+                  <i class="bx bx-chart"></i>
+                  <h4>Ranking</h4>
+                  <p>Become the most popular player, by acquiring the most likes.</p>
+                </div>
+              </div>
+            </div><!-- End .content-->
           </div>
         </div>
-        <div class="col-lg-4">
-          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-            <div class="features-icons-icon d-flex">
-              <i class="icon-layers m-auto text-primary fa fa-info-circle"></i>
-            </div>
-            <h3>Player Info</h3>
-            <p class="lead mb-0">Our platform provides info, players made availiable for themselves!</p>
+
+      </div>
+    </section><!-- End About Section -->
+
+
+    <!-- ======= Features Section ======= -->
+    <section id="features" class="features" data-aos="fade-up">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Features</h2>
+          <p>At this very first version of our platform, users will be given a set of options, presented below.</p>
+        </div>
+
+        <div class="row content">
+          <div class="col-md-5" data-aos="fade-right" data-aos-delay="100">
+            <img src="assets/img/feat1.png" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-7 pt-4" data-aos="fade-left" data-aos-delay="100">
+            <h3>Personal information.</h3>
+            <p class="font-italic">
+              Provide all your personal information that will help people identify you.
+            </p>
+            <ul>
+              <li><i class="icofont-check"></i> Fill in your First and Last Name.</li>
+              <li><i class="icofont-check"></i> Provide information about the teams you have played, the position and city..</li>
+              <li><i class="icofont-check"></i> Make your social media links available.</li>
+            </ul>
           </div>
         </div>
-        <div class="col-lg-4">
-          <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-            <div class="features-icons-icon d-flex">
-              <i class="icon-check m-auto text-primary fa fa-level-up"></i>
-            </div>
-            <h3>Scale up</h3>
-            <p class="lead mb-0">Be the most popular player among all, by gathering the most likes!</p>
+
+        <div class="row content">
+          <div class="col-md-5 order-1 order-md-2" data-aos="fade-left">
+            <img src="assets/img/feat2.png" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-7 pt-5 order-2 order-md-1" data-aos="fade-right">
+            <h3>Teams information</h3>
+            <p class="font-italic">
+              As a team, you will have the same rights a player. However, you will be able to add your roster players, to make them available to the public.
+            </p>
+            <p>
+              In order to let people get the idea and spirit of your team, fill in the fields in your profile, provide your team logo and your most recent XI.
+              Don;t forget that you are given the ability to look for new players, through the search bar, after logging in.
+            </p>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Image Showcases -->
-  <section *ngIf="!registerMode" class="showcase">
-    <div class="container-fluid p-0">
-      <div class="row no-gutters">
+        <div class="row content">
+          <div class="col-md-5" data-aos="fade-right">
+            <img src="assets/img/feat3.png" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-7 pt-5" data-aos="fade-left">
+            <h3>Become the most famous player or team.</h3>
+            <p>Now, you have the ability to become the most famous player, by gathering the most likes.</p>
+            <ul>
+              <li><i class="icofont-check"></i> Tell your teammates to like your profile.</li>
+              <li><i class="icofont-check"></i> Invite your friends to become members of our platform and gain more likes.</li>
+              <li><i class="icofont-check"></i> Take the chance to reach the top.</li>
+            </ul>
+          </div>
+        </div>
 
-        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('../../assets/showcase1.jpg');"></div>
-        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-          <h2>Build your Image Gallery</h2>
-          <br>
-          <p class="lead mb-0">Inside the application, you can easily upoad images that show you in action! Upload as many images as you want and select as your profile picture the best,
-            in order to have more chances to get picked by a coach!
-          </p>
-        </div>
       </div>
-      <div class="row no-gutters">
-        <div class="col-lg-6 text-white showcase-img" style="background-image: url('../../assets/showcase2.jpg');"></div>
-        <div class="col-lg-6 my-auto showcase-text">
-          <h2>Share your Info</h2>
-          <p class="lead mb-0">Update your profile by providing information about the position you are playing, teams you have played and you current club. Make your current location 
-            availiable in order to help staff and coaches who are looking a player of your class to find you!
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section><!-- End Features Section -->
 
-  <!-- Call to Action -->
-  <section *ngIf="!registerMode" class="call-to-action text-white text-center">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-9 mx-auto">
-          <h2 class="mb-4">Ready to get started? Sign up now!</h2>
+    <!-- ======= Steps Section ======= -->
+    <section id="steps" class="steps">
+      <div class="container">
+
+        <div class="row no-gutters" data-aos="fade-up">
+
+          <div class="col-lg-4 col-md-6 content-item" data-aos="fade-up" data-aos-delay="100">
+            <span>01</span>
+            <h4>Sign up</h4>
+            <p>All you need is just an email and a password.</p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 content-item" data-aos="fade-up" data-aos-delay="200">
+            <span>02</span>
+            <h4>Edit yoy profile</h4>
+            <p>Go to your profile and fill your personal info.</p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 content-item" data-aos="fade-up" data-aos-delay="300">
+            <span>03</span>
+            <h4> Add photos</h4>
+            <p>Add a photo gallery. Show us your best moments.</p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 content-item" data-aos="fade-up" data-aos-delay="100">
+            <span>04</span>
+            <h4>Choose a profile photo</h4>
+            <p>Choose your profile photo, from your image gallery.</p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 content-item" data-aos="fade-up" data-aos-delay="200">
+            <span>05</span>
+            <h4>Like other players</h4>
+            <p>Give your like to your teammates or other players.</p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 content-item" data-aos="fade-up" data-aos-delay="300">
+            <span>06</span>
+            <h4>Search for your teammates</h4>
+            <p>Search your teammates, or other players in simmilar or different position.</p>
+          </div>
+
         </div>
-        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-          <form>
+
+      </div>
+    </section><!-- End Steps Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Contact</h2>
+          <p>In case of any questions or feedback, you can always contact us via phone or email.</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-6">
+
             <div class="row">
-              <div class="col text-center">
-                <button type="submit" (click)="registerToggle()" class="btn btn-block btn-lg btn-primary">Sign up!</button>
+              <div class="col-md-12">
+                <div class="info-box">
+                  <i class="bx bx-map"></i>
+                  <h3>Our Address</h3>
+                  <p>Pentalofou</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box mt-4">
+                  <i class="bx bx-envelope"></i>
+                  <h3>Email Us</h3>
+                  <p>info@example.com<br>contact@example.com</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box mt-4">
+                  <i class="bx bx-phone-call"></i>
+                  <h3>Call Us</h3>
+                  <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+                </div>
               </div>
             </div>
-          </form>
+
+          </div>
+
+          <div class="col-lg-6 mt-4 mt-md-0">
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+              <div class="form-row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                  <div class="validate"></div>
+                </div>
+                <div class="col-md-6 form-group">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                  <div class="validate"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                <div class="validate"></div>
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                <div class="validate"></div>
+              </div>
+              <div class="mb-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+              <div class="text-center"><button type="submit">Send Message</button></div>
+            </form>
+          </div>
+
         </div>
+
       </div>
-    </div>
-  </section>
+    </section><!-- End Contact Section -->
 
-  
-</body>
-
+  </main><!-- End #main -->
+  </div>

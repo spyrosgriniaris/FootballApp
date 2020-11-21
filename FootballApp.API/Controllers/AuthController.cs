@@ -45,7 +45,7 @@ namespace FootballApp.API.Controllers
             var userToCreate = _mapper.Map<User>(userForRegisterDto);
 
             var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
-
+            
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(userToCreate, userForRegisterDto.Property);

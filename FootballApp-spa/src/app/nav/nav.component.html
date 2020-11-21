@@ -1,3 +1,4 @@
+
 <nav id="mainNavbar" class="navbar navbar-expand-sm navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" *ngIf="loggedIn()" [routerLink]="['/players']"><img src="../../assets/logo.png" width="200px" alt=""></a>
@@ -27,10 +28,10 @@
         <li class="nav-item" routerLinkActive="active" >
           <a class="nav-link" [routerLink]="['/rank']">Rank</a>
         </li>
-        <li *ngIf="loggedIn()" class="nav-item" routerLinkActive="active" >
+        <li class="nav-item" routerLinkActive="active" >
           <a class="nav-link" [routerLink]="['/likes']" >Likes</a>
         </li>
-        <li *ngIf="loggedIn()" class="nav-item" routerLinkActive="active" >
+        <li class="nav-item" routerLinkActive="active" >
           <a class="nav-link" [routerLink]="['/messages']">Messages</a>
         </li>
         <li *appHasRole="['Admin']" class="nav-item" routerLinkActive="active" >
