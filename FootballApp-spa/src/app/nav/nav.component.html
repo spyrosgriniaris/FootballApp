@@ -21,17 +21,17 @@
     >
       <!-- right nav menus -->
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item"  routerLinkActive="active">
+        <li *ngIf="loggedIn()" class="nav-item"  routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/players']" >Players 
           </a>
         </li>
-        <li class="nav-item" routerLinkActive="active" >
+        <li *ngIf="loggedIn()" class="nav-item" routerLinkActive="active" >
           <a class="nav-link" [routerLink]="['/rank']">Rank</a>
         </li>
-        <li class="nav-item" routerLinkActive="active" >
+        <li *ngIf="loggedIn()" class="nav-item" routerLinkActive="active" >
           <a class="nav-link" [routerLink]="['/likes']" >Likes</a>
         </li>
-        <li class="nav-item" routerLinkActive="active" >
+        <li *ngIf="loggedIn()" class="nav-item" routerLinkActive="active" >
           <a class="nav-link" [routerLink]="['/messages']">Messages</a>
         </li>
         <li *appHasRole="['Admin']" class="nav-item" routerLinkActive="active" >

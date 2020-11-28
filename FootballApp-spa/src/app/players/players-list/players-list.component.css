@@ -1,6 +1,13 @@
 .filtersSideBar {
     /* background-color: #d1e0e0; */
-    background-color: #f5f2f2;
+    background-color: #f5f5f5;
+    
+}
+
+.body {
+  /* background-color: #f5f5f5; */
+  /* background-color: #f5f5f5; */
+
 }
 
 .slider {
@@ -139,11 +146,6 @@
     font-size: 23px;
 }
 
-.body {
-  /* background-color: #f5f5f5; */
-  background-color: #f5f5f5;
-
-}
 
 .searchIcon {
   cursor: pointer;

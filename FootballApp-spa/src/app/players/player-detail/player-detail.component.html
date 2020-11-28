@@ -1,188 +1,194 @@
-<body>
-  <div class="container">
-    <div class="row">
-      <h2 class="mt-3">{{user.knownAs}}'s Profile</h2>
-    </div>
-    <div class="row">
-      <div class="col-sm-4">
-        <!-- general info including the photo -->
-        <div class="card shadow-lg" style="background-color: #E1E3E3;">
-          <img class="card-img-top img-thumbnail shadow-lg" src="{{user.photoUrl || '../../../../../assets/user.png'}}" alt="{{user.knownAs}}">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="row">
+        <div class="card">
           <div class="card-body">
-            <div class="shadow-lg">
-              <div class="row">
-                <div class="col-sm-6 col-md-6 col-lg-6">
-                  <strong>Location:</strong>
-                  <p>{{user.city}}, {{user?.country}}</p>
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-6" style="left: 0;">
-                  <ul>
-                    <li *ngIf="user.facebookUrl">
-                      <a href="{{user?.facebookUrl}}"><i class="fa fa-facebook-f icon"></i></a>
-                    </li>
-                    <li *ngIf="user.instagramUrl">
-                      <a href="{{user?.instagramUrl}}"><i class="fa fa-instagram icon"></i></a>
-                    </li>
-                    <li *ngIf="user.twitterUrl">
-                      <a href="{{user?.twitterUrl}}"><i class="fa fa-twitter icon"></i></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <hr>
-            </div>
-            <div class="shadow-lg">
-              <strong>Age:</strong>
-              <p>{{user.age}}</p>
-              <hr>
-            </div>
-            <div class="shadow-lg">
-              <strong>Last Active:</strong>
-              <p>{{user.lastActive | timeago}}</p>
-              <hr>
-            </div>
-            <div class="shadow-lg">
-              <strong>Member since:</strong>
-              <p>{{user.created | date: 'mediumDate'}}</p>
-              <hr>
-            </div>
-          </div>
-          <div class="card-footer shadow-lg" style="background-color: #E1E3E3;">
-            <div class="btn-group d-flex">
-              <button class="btn btn-primary w-100">Like</button>
-              <button class="btn btn-success w-100" (click)="selectTab(3)">Message</button>
-              <!-- ta tab exoun id 0,1,2,3.. -->
-            </div>
+            There will be an add
           </div>
         </div>
       </div>
-      <div class="col-sm-8">
-        <!-- tabbed panel -->
-        <div class="tab-panel shadow-lg"  style="background-color: #E1E3E3;">
-          <tabset  style="background-color: #E1E3E3;" class="member-tabset" #memberTabs> 
-            <!-- to reference einai gia ta minimata -->
-            <tab style="background-color: #E1E3E3;" heading="About {{user?.knownAs}}">
-              <h5>General Information</h5>
-                <div style="border: 1px solid gainsboro; padding: 3px;" class="shadow-lg">
-                  <div class="row">
-                    <div class="col lg-5 col-md-5">
-                      <label for="fullName">FullName: </label>
-                    </div>
-                    <div class="col-lg-7 col-md-7">
-                      <label *ngIf="!user.fullName" for="fullNameText"> - </label>
-                      <label for="fullNameText">{{user.fullName}}</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col lg-5 col-md-5">
-                      <label for="knownAs">Known As: </label>
-                    </div>
-                    <div class="col-lg-7 col-md-7">
-                      <label *ngIf="!user.knownAs" for="knownAsText"> - </label>
-                      <label for="knownAsText">{{user.knownAs}}</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col lg-5 col-md-5">
-                      <label for="placeOfBirth">Place of Birth: </label>
-                    </div>
-                    <div class="col-lg-7 col-md-7">
-                      <label *ngIf="!user.placeOfBirth" for="placeOfBirthText"> - </label>
-                      <label for="placeOfBirthText">{{user.placeOfBirth}}</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col lg-5 col-md-5">
-                      <label for="citizenship">Citizenship: </label>
-                    </div>
-                    <div class="col-lg-7 col-md-7">
-                      <label *ngIf="!user.citizenship" for="citizenshipText"> - </label>
-                      <label for="citizenshipText">{{user.citizenship}}</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col lg-5 col-md-5">
-                      <label for="age">Age: </label>
-                    </div>
-                    <div class="col-lg-7 col-md-7">
-                      <label *ngIf="!user.age" for="ageText"> - </label>
-                      <label for="ageText">{{user.age}}</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col lg-5 col-md-5">
-                      <label for="height">Height: </label>
-                    </div>
-                    <div class="col-lg-7 col-md-7">
-                      <label *ngIf="!user.height" for="heightText">  </label>
-                      <label for="heightText">{{user.height}}</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col lg-5 col-md-5">
-                      <label for="foot">Foot: </label>
-                    </div>
-                    <div class="col-lg-7 col-md-7">
-                      <label *ngIf="!user.foot" for="footText"> - </label>
-                      <label for="footText">{{user.foot}}</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col lg-5 col-md-5">
-                      <label for="positions">Positions: </label>
-                    </div>
-                    <div class="col-lg-7 col-md-7">
-                      <span class=" mr-1 badge" *ngFor="let position of positions"
-                      [ngClass]="
-                      {'badge-warning':position === 'Goalkeeper',
-                      'badge-danger':position === 'Striker',
-                      'badge-primary':position === 'Defender',
-                      'badge-secondary':position === 'Midfielder'
-                   }">{{position}}</span>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col lg-5 col-md-5">
-                      <label for="currentClub">Current Club: </label>
-                    </div>
-                    <div class="col-lg-7 col-md-7">
-                      <label *ngIf="!user.currentClub" for="currentClubText"> - </label>
-                      <label for="currentClubText">{{user.currentClub}}</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col lg-5 col-md-5">
-                      <label for="clubsPlayed">Clubs Played at: </label>
-                    </div>
-                    <div class="col-lg-7 col-md-7">
-                      <label for="clubsPlayedText"> - </label>
-                    </div>
+      <div class="row">
+        <div class="card">
+          <div class="card-body">
+            There will be an add
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card">
+          <div class="card-body">
+            There will be an add
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <div class="main-body">    
+        <div class="row gutters-sm">
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex flex-column align-items-center text-center">
+                  <img src="{{user.photoUrl || '../../../../../assets/user.png'}}" alt="{{user.knownAs}}" alt="{{user.knownAs}}" class="rounded-circle" width="150">
+                  <div class="mt-3">
+                    <h4>{{user.knownAs}}</h4>
+                    <p class="text-secondary mb-1">{{user.age}}</p>
+                    <p class="text-muted font-size-sm"><p>{{user.city}}, {{user?.country}}</p>
+                    <p>Last active: </p> <p class="text-muted font-size-sm">{{user.lastActive | date: 'mediumDate'}}</p>
+                    <button class="btn btn-primary">Like</button>
                   </div>
                 </div>
-  
-              <h5 *ngIf="user.introduction" class="mt-3">Description</h5>
-              <div *ngIf="user.introduction" class="mt-3 shadow-lg" style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px;">
-                <p>{{user.introduction}}</p>
               </div>
-              <h5 *ngIf="user.lookingFor" mt-3>Looking For</h5>
-              <div *ngIf="user.lookingFor" class="shadow-lg" style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px;">
-                <p>{{user.lookingFor}}</p>
+            </div>
+            <div class="card mt-3">
+              <ul class="list-group list-group-flush">
+                <li *ngIf="user.facebookUrl" class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                  <a href="{{user?.facebookUrl}}"><i class="fa fa-facebook-f icon"></i></a>
+                </li>
+                <li *ngIf="user.instagramUrl" class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                  <a href="{{user?.instagramUrl}}"><i class="fa fa-instagram icon"></i></a>
+                </li>
+                <li *ngIf="user.twitterUrl" class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                  <a href="{{user?.twitterUrl}}"><i class="fa fa-twitter icon"></i></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-body">
+                <div>
+                  <tabset>
+                    <tab heading="General Info">       
+                      <div class="row">
+                        <div class="col-sm-6 col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                      <div class="row">
+                                        <div class="col-sm-3">
+                                          <h6 class="mb-0">FullName</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                          {{user.fullName}}
+                                        </div>
+                                      </div>
+                                      <hr>
+                                      <div class="row">
+                                        <div class="col-sm-3">
+                                          <h6 class="mb-0">Birth Place</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                          <label *ngIf="!user.placeOfBirth" for="placeOfBirthText"> - </label>
+                                          <label for="placeOfBirthText">{{user.placeOfBirth}}</label>
+                                        </div>
+                                      </div>
+                                      <hr>
+                                      <div class="row">
+                                        <div class="col-sm-3">
+                                          <h6 class="mb-0">Citizen</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                          <label *ngIf="!user.citizenship" for="citizenshipText"> - </label>
+                                          <label for="citizenshipText">{{user.citizenship}}</label>
+                                        </div>
+                                      </div>
+                                      <hr>
+                                      <div class="row">
+                                        <div class="col-sm-3">
+                                          <h6 class="mb-0">Height</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                          <label *ngIf="!user.height" for="heightText">  </label>
+                                          <label for="heightText">{{user.height}}</label>
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                          <h6 class="mb-0">Foot</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                          <label *ngIf="!user.foot" for="footText"> - </label>
+                                          <label for="footText">{{user.foot}}</label>
+                                        </div>
+                                      </div>
+                                      <hr>
+                                      <div class="row">
+                                        <div class="col-sm-3">
+                                          <h6 class="mb-0">Positions</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                          <span class=" mr-1 badge" *ngFor="let position of positions"
+                                            [ngClass]="
+                                            {'badge-warning':position === 'Goalkeeper',
+                                            'badge-danger':position === 'Striker',
+                                            'badge-primary':position === 'Defender',
+                                            'badge-secondary':position === 'Midfielder'
+                                        }">{{position}}</span>
+                                        </div>
+                                      </div>
+                                      <hr>
+                                      <div class="row">
+                                        <div class="col-sm-3">
+                                          <h6 class="mb-0">Previous clubs</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                          --
+                                        </div>
+                                      </div>
+                                      <hr>
+                                      <div class="row">
+                                        <div class="col-sm-3">
+                                          <h6 class="mb-0">Current Club</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                          <label *ngIf="!user.currentClub" for="currentClubText"> - </label>
+                                          <label for="currentClubText">{{user.currentClub}}</label>
+                                        </div>
+                                      </div>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </tab>
+                    <tab heading="Photos">
+                      <ngx-gallery style="display: inline-block; margin-bottom: 20px;" [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+                    </tab>
+                  </tabset>
+                </div>
               </div>
-              <h5 *ngIf="user.interests" mt-3>Interests</h5>
-              <div *ngIf="user.interests" class="shadow-lg" style="border: 1px solid gainsboro; padding: 3px; margin-top: 5px;">
-                <p>{{user.interests}}</p>
-              </div>
-            </tab>
-            <tab heading="Photos">
-              <ngx-gallery style="display: inline-block; margin-bottom: 20px;" [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
-            </tab>
-            <tab heading="Messages">
-              <p>Messages will go here</p>
-              <!-- <app-member-messages [recipientId]="user.id"></app-member-messages> -->
-            </tab>
-          </tabset>
-        </div>
+            </div>
+          </div>
+
+          
+      </div>
+    </div>
+</div>
+
+<!-- Recommended players -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+        <p>There will be cards of recommended players based on age and position. User will be able to visit recommended user's profile
+          by clicking on the card.
+        </p>
       </div>
     </div>
   </div>
-</body>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="container">
+    
+  </div> -->
+  <!-- end of recommended players -->
